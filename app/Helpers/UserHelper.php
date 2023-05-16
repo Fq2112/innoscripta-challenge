@@ -35,7 +35,7 @@ class UserHelper
                         $user = $userTemp->where('id', $dt->{$column})->first();
                         $dt->{$column} = isset($custom[$column]) && !$user ? [
                             'id' => null,
-                            'photo' => asset('/mock/avatar/' . rand(1, 5) . '.png'),
+                            'photo' => asset('/images/mock/avatar/' . rand(1, 5) . '.png'),
                             'name' => $dt->{$custom[$column]}
                         ] : $userTemp->where('id', $dt->{$column})->first();
                     }

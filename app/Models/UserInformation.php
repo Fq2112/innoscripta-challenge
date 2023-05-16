@@ -65,11 +65,11 @@ class UserInformation extends NhModel
     public static function photoMockList()
     {
         return [
-            asset('/mock/avatar/1.png'),
-            asset('/mock/avatar/2.png'),
-            asset('/mock/avatar/3.png'),
-            asset('/mock/avatar/4.png'),
-            asset('/mock/avatar/5.png'),
+            asset('/images/mock/avatar/1.png'),
+            asset('/images/mock/avatar/2.png'),
+            asset('/images/mock/avatar/3.png'),
+            asset('/images/mock/avatar/4.png'),
+            asset('/images/mock/avatar/5.png'),
         ];
     }
 
