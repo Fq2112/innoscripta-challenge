@@ -21,7 +21,7 @@ function AccordionList({
       >
         <div
           className={classNames(
-            "flex items-center gap-x-3 font-medium transition ease duration-50",
+            "flex items-center gap-x-3 uppercase font-medium transition ease duration-50",
             { "!text-primary-50": focus == tabIndex }
           )}
         >

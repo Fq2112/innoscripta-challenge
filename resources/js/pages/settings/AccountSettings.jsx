@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { titleScroller } from "../../utils/Utils";
 import PageTitle from "../../components/layouts/partials/PageTitle";
 import Input from "../../components/form/Input";
+import AccordionList from "../../components/accordion/AccordionList";
 import Password from "../../components/form/Password";
 import { useForm } from "react-hook-form";
 import validationStore from "../../store/validationStore";
@@ -24,13 +25,15 @@ import {
 import LoadingForm from "../../components/LoadingForm";
 import FormButton from "../../components/button/FormButton";
 import classNames from "classnames";
-import { FaDraftingCompass, FaHardHat, FaTruck } from "react-icons/fa";
+import { FaAsterisk, FaUserEdit } from "react-icons/fa";
 import authStore from "../../store/authStore";
 import InputFile from "../../components/form/InputFile";
 import SelectAsync from "../../components/form/SelectAsync";
 import TextArea from "../../components/form/TextArea";
 import { objSelectTo } from "../../helpers/ObjHelper";
 import Extend from "../../components/layouts/Extend";
+import { FaUserCog } from "react-icons/fa";
+import { BsIncognito } from "react-icons/bs";
 
 function AccountSettings() {
   const {
@@ -63,6 +66,9 @@ function AccountSettings() {
   const loading = useMemo(() => getLoading[L_DETAIL], [getLoading]);
 
   const { name, photo } = authStore((state) => state);
+
+  // accordion toggle
+  const [focus, setFocus] = useState(null);
 
   // INIT
   useEffect(() => {
@@ -172,7 +178,10 @@ function AccountSettings() {
               <button
                 type="button"
                 className="relative text-lg uppercase py-2 px-6 rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 "
-                onClick={() => setisProfile(!isProfile)}
+                onClick={() => {
+                  setisProfile(!isProfile);
+                  setFocus(0);
+                }}
               >
                 {isProfile ? "Change Password" : "Edit Profile"}
               </button>
@@ -211,105 +220,324 @@ function AccountSettings() {
                       )}
                     >
                       {isProfile ? (
-                        <div className="space-y-4">
-                          <div>
-                            <Input
-                              label="Full Name"
-                              name="name"
-                              register={register}
-                              errors={{ ...errors, ...validation }}
-                              placeholder="Enter your full name"
-                              validation={{ required: true }}
-                              defaultValue={details.name}
-                              changeValue={updateValue}
-                            />
-                          </div>
-                          <div>
-                            <InputFile
-                              imageDefault={details.photo}
-                              imageOnly={true}
-                              label="Photo"
-                              name="photo"
-                              accept="image/png, image/jpeg, image/webp"
-                              register={register}
-                              errors={{ ...errors, ...validation }}
-                              placeholder="No file chosen"
-                              setValue={(name, value) => setValue(name, value)}
-                            />
-                          </div>
-                          <div>
-                            <Input
-                              label="Birthdate"
-                              name="birthdate"
-                              type="date"
-                              register={register}
-                              errors={{ ...errors, ...validation }}
-                              placeholder="Enter your birthdate"
-                              validation={{ required: true }}
-                              defaultValue={details.birthdate}
-                              changeValue={updateValue}
-                            />
-                          </div>
-                          <div>
-                            <SelectAsync
-                              defaultValue={objSelectTo(
-                                details,
-                                "gender",
-                                "gender"
-                              )}
-                              placeholder="Gender"
-                              label="Gender"
-                              name="gender"
-                              errors={{ ...errors, ...validation }}
-                              validation={{
-                                required: true,
-                              }}
-                              isLoading={getLoading[L_S_GENDER]}
-                              register={register}
-                              loadAPI={(search, cb) =>
-                                selectData({
-                                  path: A_U_GENDER,
-                                  search,
-                                  loadingVar: L_S_GENDER,
-                                  cb,
-                                })
-                              }
-                              setValue={(e) => setValue("gender", e)}
-                              onChange={(e) => {
-                                setDetail({
-                                  [FORM_EDIT_PROFILE]: { gender: e.value },
-                                });
-                                updateValue("gender", e, true);
-                              }}
-                            />
-                          </div>
+                        <>
+                          {/* personal data */}
+                          <AccordionList
+                            Icon={FaUserEdit}
+                            title="Personal Data"
+                            tabIndex="1"
+                            focus={focus}
+                            setFocus={setFocus}
+                          >
+                            <div className="py-4 space-y-4">
+                              <div>
+                                <Input
+                                  label="Full Name"
+                                  name="name"
+                                  register={register}
+                                  errors={{ ...errors, ...validation }}
+                                  placeholder="Enter your full name"
+                                  validation={{ required: true }}
+                                  defaultValue={details.name}
+                                  changeValue={updateValue}
+                                />
+                              </div>
+                              <div>
+                                <InputFile
+                                  imageDefault={details.photo}
+                                  imageOnly={true}
+                                  label="Photo"
+                                  name="photo"
+                                  accept="image/png, image/jpeg, image/webp"
+                                  register={register}
+                                  errors={{ ...errors, ...validation }}
+                                  placeholder="No file chosen"
+                                  setValue={(name, value) =>
+                                    setValue(name, value)
+                                  }
+                                />
+                              </div>
+                              <div>
+                                <Input
+                                  label="Birthdate"
+                                  name="birthdate"
+                                  type="date"
+                                  register={register}
+                                  errors={{ ...errors, ...validation }}
+                                  placeholder="Enter your birthdate"
+                                  validation={{ required: true }}
+                                  defaultValue={details.birthdate}
+                                  changeValue={updateValue}
+                                />
+                              </div>
+                              <div>
+                                <SelectAsync
+                                  defaultValue={objSelectTo(
+                                    details,
+                                    "gender",
+                                    "gender"
+                                  )}
+                                  placeholder="Gender"
+                                  label="Gender"
+                                  name="gender"
+                                  errors={{ ...errors, ...validation }}
+                                  validation={{
+                                    required: true,
+                                  }}
+                                  isLoading={getLoading[L_S_GENDER]}
+                                  register={register}
+                                  loadAPI={(search, cb) =>
+                                    selectData({
+                                      path: A_U_GENDER,
+                                      search,
+                                      loadingVar: L_S_GENDER,
+                                      cb,
+                                    })
+                                  }
+                                  setValue={(e) => setValue("gender", e)}
+                                  onChange={(e) => {
+                                    setDetail({
+                                      [FORM_EDIT_PROFILE]: { gender: e.value },
+                                    });
+                                    updateValue("gender", e, true);
+                                  }}
+                                />
+                              </div>
 
-                          <div>
-                            <TextArea
-                              label="Address"
-                              name="address"
-                              register={register}
-                              errors={{ ...errors, ...validation }}
-                              placeholder="Enter your address"
-                              defaultValue={details.address}
-                              changeValue={updateValue}
-                            />
-                          </div>
+                              <div>
+                                <TextArea
+                                  label="Address"
+                                  name="address"
+                                  register={register}
+                                  errors={{ ...errors, ...validation }}
+                                  placeholder="Enter your address"
+                                  defaultValue={details.address}
+                                  changeValue={updateValue}
+                                />
+                              </div>
 
-                          <div>
-                            <Input
-                              label="Phone"
-                              name="phone"
-                              register={register}
-                              errors={{ ...errors, ...validation }}
-                              placeholder="Enter your phone"
-                              validation={{ required: true }}
-                              setNumberOnly={true}
-                              defaultValue={details.phone}
-                              changeValue={updateValue}
-                            />
-                          </div>
-                        </div>
+                              <div>
+                                <Input
+                                  label="Phone"
+                                  name="phone"
+                                  register={register}
+                                  errors={{ ...errors, ...validation }}
+                                  placeholder="Enter your phone"
+                                  validation={{ required: true }}
+                                  setNumberOnly={true}
+                                  defaultValue={details.phone}
+                                  changeValue={updateValue}
+                                />
+                              </div>
+                            </div>
+                          </AccordionList>
+
+                          {/* news preferences */}
+                          <AccordionList
+                            Icon={BsIncognito}
+                            title="News Preferences"
+                            tabIndex="2"
+                            focus={focus}
+                            setFocus={setFocus}
+                          >
+                            <div className="py-4 space-y-4">
+                              {/* sources */}
+                              <div className="flex flex-col gap-y-1">
+                                {/* header */}
+                                <div className="flex items-center gap-x-2">
+                                  <input
+                                    id="cb_sources"
+                                    type="checkbox"
+                                    className="form-checkbox cursor-pointer"
+                                    name="cb_sources"
+                                    //   value={e.value}
+                                    //   onChange={(e) => {
+                                    //     onChange(e);
+                                    //     setValue(name, e.target.value);
+                                    //   }}
+                                  />
+                                  <label
+                                    className="flex font-medium cursor-pointer uppercase"
+                                    htmlFor="cb_sources"
+                                  >
+                                    Sources
+                                  </label>
+                                </div>
+                                {/* detail */}
+                                <div className="flex flex-col ml-6">
+                                  <div className="flex items-center gap-x-2">
+                                    <input
+                                      id="cb-source-1"
+                                      type="checkbox"
+                                      className="form-checkbox cursor-pointer"
+                                      name="cb_sources"
+                                      //   value={e.value}
+                                      //   onChange={(e) => {
+                                      //     onChange(e);
+                                      //     setValue(name, e.target.value);
+                                      //   }}
+                                    />
+                                    <label
+                                      className="text-sm font-medium cursor-pointer"
+                                      htmlFor="cb-source-1"
+                                    >
+                                      Source A
+                                    </label>
+                                  </div>
+                                  <div className="flex items-center gap-x-2">
+                                    <input
+                                      id="cb-source-2"
+                                      type="checkbox"
+                                      className="form-checkbox cursor-pointer"
+                                      name="cb_sources"
+                                      //   value={e.value}
+                                      //   onChange={(e) => {
+                                      //     onChange(e);
+                                      //     setValue(name, e.target.value);
+                                      //   }}
+                                    />
+                                    <label
+                                      className="text-sm font-medium cursor-pointer"
+                                      htmlFor="cb-source-2"
+                                    >
+                                      Source B
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* categories */}
+                              <div className="flex flex-col gap-y-1">
+                                {/* header */}
+                                <div className="flex items-center gap-x-2">
+                                  <input
+                                    id="cb_categories"
+                                    type="checkbox"
+                                    className="form-checkbox cursor-pointer"
+                                    name="cb_categories"
+                                    //   value={e.value}
+                                    //   onChange={(e) => {
+                                    //     onChange(e);
+                                    //     setValue(name, e.target.value);
+                                    //   }}
+                                  />
+                                  <label
+                                    className="flex font-medium cursor-pointer uppercase"
+                                    htmlFor="cb_categories"
+                                  >
+                                    categories
+                                  </label>
+                                </div>
+                                {/* detail */}
+                                <div className="flex flex-col ml-6">
+                                  <div className="flex items-center gap-x-2">
+                                    <input
+                                      id="cb-category-1"
+                                      type="checkbox"
+                                      className="form-checkbox cursor-pointer"
+                                      name="cb_categories"
+                                      //   value={e.value}
+                                      //   onChange={(e) => {
+                                      //     onChange(e);
+                                      //     setValue(name, e.target.value);
+                                      //   }}
+                                    />
+                                    <label
+                                      className="text-sm font-medium cursor-pointer"
+                                      htmlFor="cb-category-1"
+                                    >
+                                      Category A
+                                    </label>
+                                  </div>
+                                  <div className="flex items-center gap-x-2">
+                                    <input
+                                      id="cb-category-2"
+                                      type="checkbox"
+                                      className="form-checkbox cursor-pointer"
+                                      name="cb_categories"
+                                      //   value={e.value}
+                                      //   onChange={(e) => {
+                                      //     onChange(e);
+                                      //     setValue(name, e.target.value);
+                                      //   }}
+                                    />
+                                    <label
+                                      className="text-sm font-medium cursor-pointer"
+                                      htmlFor="cb-category-2"
+                                    >
+                                      Category B
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* authors */}
+                              <div className="flex flex-col gap-y-1">
+                                {/* header */}
+                                <div className="flex items-center gap-x-2">
+                                  <input
+                                    id="cb_authors"
+                                    type="checkbox"
+                                    className="form-checkbox cursor-pointer"
+                                    name="cb_authors"
+                                    //   value={e.value}
+                                    //   onChange={(e) => {
+                                    //     onChange(e);
+                                    //     setValue(name, e.target.value);
+                                    //   }}
+                                  />
+                                  <label
+                                    className="flex font-medium cursor-pointer uppercase"
+                                    htmlFor="cb_authors"
+                                  >
+                                    authors
+                                  </label>
+                                </div>
+                                {/* detail */}
+                                <div className="flex flex-col ml-6">
+                                  <div className="flex items-center gap-x-2">
+                                    <input
+                                      id="cb-author-1"
+                                      type="checkbox"
+                                      className="form-checkbox cursor-pointer"
+                                      name="cb_authors"
+                                      //   value={e.value}
+                                      //   onChange={(e) => {
+                                      //     onChange(e);
+                                      //     setValue(name, e.target.value);
+                                      //   }}
+                                    />
+                                    <label
+                                      className="text-sm font-medium cursor-pointer"
+                                      htmlFor="cb-author-1"
+                                    >
+                                      Author A
+                                    </label>
+                                  </div>
+                                  <div className="flex items-center gap-x-2">
+                                    <input
+                                      id="cb-author-2"
+                                      type="checkbox"
+                                      className="form-checkbox cursor-pointer"
+                                      name="cb_authors"
+                                      //   value={e.value}
+                                      //   onChange={(e) => {
+                                      //     onChange(e);
+                                      //     setValue(name, e.target.value);
+                                      //   }}
+                                    />
+                                    <label
+                                      className="text-sm font-medium cursor-pointer"
+                                      htmlFor="cb-author-2"
+                                    >
+                                      Author B
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </AccordionList>
+                        </>
                       ) : (
                         <div className="space-y-4">
                           <div>
@@ -370,7 +598,10 @@ function AccountSettings() {
                         </div>
                       )}
 
-                      <FormButton onCancel={resetForm} />
+                      <FormButton
+                        onCancel={resetForm}
+                        submitText="save changes"
+                      />
                     </form>
                   )}
                 </div>

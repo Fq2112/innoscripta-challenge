@@ -30,7 +30,7 @@ function FormButton({ onCancel, submitText = "Submit" }) {
   const loading = useMemo(() => getLoading[L_POST], [getLoading]);
 
   return (
-    <div className="flex gap-x-2 justify-end mt-6">
+    <div className="flex gap-x-2 justify-end mt-8">
       <button
         type="button"
         className="min-w-[7rem] items-center justify-center w-fit uppercase py-2 px-4 text-sm text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 bg-slate-200 hover:bg-slate-200/70"
