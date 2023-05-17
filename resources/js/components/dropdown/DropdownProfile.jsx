@@ -1,13 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Transition from "../../utils/Transition";
 
 import classNames from "classnames";
 
 import authStore from "../../store/authStore";
-import { W_SA_CHANGE_PASSWORD, W_SA_EDIT_PROFILE } from "../../vars/web";
+import { W_S_ACCOUNT } from "../../vars/web";
 
-function DropdownProfile({ align, noticeSignout, setNoticeSignout }) {
+function DropdownProfile({
+  align,
+  noticeSignout,
+  setNoticeSignout,
+  isMenuWhite,
+}) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const trigger = useRef(null);
@@ -17,6 +22,9 @@ function DropdownProfile({ align, noticeSignout, setNoticeSignout }) {
 
   //   load roles from zuustand
   const { roles } = authStore((state) => state);
+
+  const location = useLocation();
+  const { pathname } = location;
 
   // close on click outside
   useEffect(() => {
@@ -48,7 +56,13 @@ function DropdownProfile({ align, noticeSignout, setNoticeSignout }) {
     <div className="relative inline-flex">
       <button
         ref={trigger}
-        className="inline-flex justify-center items-center group"
+        className={classNames(
+          "min-w-36 w-fit inline-flex justify-center items-center group uppercase py-2 px-4 text-sm text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white",
+          {
+            "bg-primary-400 hover:bg-primary-400/70": isMenuWhite,
+            "bg-primary-200 hover:bg-primary-200/70": !isMenuWhite,
+          }
+        )}
         aria-haspopup="true"
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
@@ -61,11 +75,11 @@ function DropdownProfile({ align, noticeSignout, setNoticeSignout }) {
           alt="User"
         />
         <div className="flex items-center truncate">
-          <span className="capitalize truncate ml-2 text-sm font-medium group-hover:text-slate-800 dark:group-hover:text-navy-300 dark:text-navy-100">
+          <span className="uppercase truncate ml-2 text-sm font-medium">
             {name}
           </span>
           <svg
-            className="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 dark:text-navy-500"
+            className="w-3 h-3 shrink-0 ml-1 fill-current text-white"
             viewBox="0 0 12 12"
           >
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
@@ -95,9 +109,7 @@ function DropdownProfile({ align, noticeSignout, setNoticeSignout }) {
           onBlur={() => setDropdownOpen(false)}
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200 dark:border-navy-500 capitalize">
-            <div className="font-medium text-slate-800 dark:text-navy-100">
-              {name}
-            </div>
+            <div className="font-medium text-slate-400">{name}</div>
             <div className="text-xs text-slate-500 italic">
               {roles.map((e) => e.role_name).join(", ")}
             </div>
@@ -105,25 +117,22 @@ function DropdownProfile({ align, noticeSignout, setNoticeSignout }) {
           <ul>
             <li>
               <Link
-                className="font-medium text-sm text-primary-50 hover:text-primary-100 flex items-center py-1 px-3"
-                to={W_SA_CHANGE_PASSWORD}
+                className={classNames(
+                  "font-medium text-sm hover:text-primary-100 flex items-center py-1 px-3",
+                  {
+                    "text-slate-400": !pathname.includes(W_S_ACCOUNT),
+                    "text-primary-100": pathname.includes(W_S_ACCOUNT),
+                  }
+                )}
+                to={W_S_ACCOUNT}
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
-                Change Password
-              </Link>
-            </li>
-            <li>
-              <Link
-                className="font-medium text-sm text-primary-50 hover:text-primary-100 flex items-center py-1 px-3"
-                to={W_SA_EDIT_PROFILE}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-              >
-                Edit Profile
+                Account Settings
               </Link>
             </li>
             <li>
               <div
-                className="cursor-pointer font-medium text-sm text-primary-50 hover:text-primary-100 flex items-center py-1 px-3"
+                className="cursor-pointer font-medium text-sm text-slate-400 hover:text-primary-100 flex items-center py-1 px-3"
                 onClick={() => {
                   setNoticeSignout(true);
                   setDropdownOpen(!dropdownOpen);

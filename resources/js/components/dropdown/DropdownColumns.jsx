@@ -155,7 +155,7 @@ function DropdownColumns({
               <li>
                 <button
                   type="submit"
-                  className="btn-xs uppercase bg-primary-100 hover:bg-primary-200 text-white"
+                  className="btn-xs uppercase bg-primary-200 hover:bg-primary-400 text-white"
                   onClick={() => setDropdownOpen(false)}
                   onBlur={() => setDropdownOpen(false)}
                 >

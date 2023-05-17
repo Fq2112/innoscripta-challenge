@@ -99,7 +99,7 @@ function ModalConfirm({ modalOpen, message, action, closeModal = () => {} }) {
       >
         <div
           ref={modalContent}
-          className="bg-white dark:bg-navy-700 rounded-lg shadow-lg overflow-auto max-w-[26em] w-full max-h-full py-8 relative"
+          className="bg-white text-slate-800 dark:bg-navy-700 rounded-lg shadow-lg overflow-auto max-w-[26em] w-full max-h-full py-8 relative"
         >
           <AiOutlineExclamationCircle className="w-28 h-28 mx-auto text-warning animate-pulse" />
 

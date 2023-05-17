@@ -3,7 +3,7 @@ import Header from "./partials/Header";
 import Footer from "./partials/Footer";
 import classNames from "classnames";
 
-const Extend = ({ menu, children, isSlate = false }) => {
+const Extend = ({ children, isSlate = false }) => {
   const [isMenuWhite, setIsMenuWhite] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
   const runScroll = (e) => {
@@ -26,7 +26,7 @@ const Extend = ({ menu, children, isSlate = false }) => {
       onScroll={runScroll}
     >
       {/* header */}
-      <Header menu={menu} isMenuWhite={isMenuWhite} />
+      <Header isMenuWhite={isMenuWhite} />
 
       {/* content */}
       {children}

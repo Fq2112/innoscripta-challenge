@@ -61,7 +61,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .form-textarea,
 .form-multiselect,
 .form-select {
-    @apply text-sm text-slate-800 bg-white border dark:text-navy-100 dark:bg-navy-700 dark:border-navy-500 dark:disabled:bg-navy-900 dark:disabled:hover:bg-navy-800 dark:disabled:border-navy-700;
+    @apply text-base text-slate-800 bg-white border dark:text-navy-100 dark:bg-navy-700 dark:border-navy-500 dark:disabled:bg-navy-900 dark:disabled:hover:bg-navy-800 dark:disabled:border-navy-700;
 }
 
 .form-checkbox,

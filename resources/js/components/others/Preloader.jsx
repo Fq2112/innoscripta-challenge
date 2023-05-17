@@ -8,7 +8,7 @@ function Preloader() {
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-white dark:bg-navy-900">
       <img
-        className="animate-pulse w-1/5"
+        className="animate-pulse w-[15%]"
         src={!darkMode ? LOGO_IMG() : LOGO_WHITE_IMG()}
         alt="logo"
       />

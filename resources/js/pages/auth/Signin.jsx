@@ -16,7 +16,7 @@ import {
 import Input from "../../components/form/Input";
 import Password from "../../components/form/Password";
 import classNames from "classnames";
-import { W_FORGOT } from "../../vars/web";
+import { W_FORGOT, W_SIGNIN } from "../../vars/web";
 import darkModeStore from "../../store/darkModeStore";
 
 function Signin() {
@@ -42,7 +42,7 @@ function Signin() {
   useEffect(() => titleScroller("Sign In"), []);
 
   return (
-    <main className="bg-white dark:bg-navy-900">
+    <main className="text-black bg-white dark:bg-navy-900">
       <div className="relative md:flex">
         {/* Content */}
         <div className="md:w-1/2">
@@ -51,7 +51,7 @@ function Signin() {
             <div className="flex-1">
               <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
                 {/* Logo */}
-                <Link className="block" to="/">
+                <Link className="block" to={W_SIGNIN}>
                   <img
                     src={darkMode ? LOGO_WHITE_IMG() : LOGO_IMG()}
                     alt="logo"
@@ -105,7 +105,7 @@ function Signin() {
                   </div>
                   <button
                     className={classNames(
-                      "flex gap-x-1 btn bg-primary-100 hover:bg-primary-200 text-white uppercase ml-3",
+                      "flex gap-x-1 btn bg-primary-200 hover:bg-primary-400 text-white uppercase ml-3",
                       {
                         "opacity-75 cursor-not-allowed": loading,
                       }

@@ -142,18 +142,12 @@ const SelectAsync = ({
       option: (provided, state) => ({
         ...provided,
         textTransform: "capitalize",
-        color:
-          state.isSelected || state.isFocused || state.isHovered
-            ? "#fff"
-            : darkMode
-            ? "var(--text-dark-scheme)"
-            : "#1e293b",
-        backgroundColor:
-          state.isSelected || state.isFocused || state.isHovered
-            ? "var(--main-scheme)"
-            : darkMode
-            ? "var(--bg-dark-scheme)"
-            : "#fff",
+        color: state.isSelected ? "#fff" : "unset",
+        backgroundColor: state.isSelected
+          ? "var(--main-scheme)"
+          : state.isFocused || state.isHovered
+          ? "var(--white-dark-scheme)"
+          : "#fff",
         padding: "0 1rem",
         "&:active": {
           color: "#fff",
@@ -162,7 +156,6 @@ const SelectAsync = ({
       }),
     });
   }, [showError, darkMode]);
-
 
   const [searchDelay, setSearchDelay] = useState();
 

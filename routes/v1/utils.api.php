@@ -10,7 +10,7 @@ Route::name('utils.')->prefix('utils')->group(function (): void {
             Route::get('language', 'newsLanguage')->name('language');
             Route::get('country', 'newsCountry')->name('country');
             Route::get('author', 'newsAuthor')->name('author');
-            Route::get('source', 'newsSource')->name('source');
         });
+        Route::get('gender', 'gender')->name('gender');
     });
 });

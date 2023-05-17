@@ -11,6 +11,7 @@ export const DATA_PARAMS = [
 export const KEY_PARAMS = ["id", "create"];
 
 export const APP_NAME = import.meta.env.VITE_APP_NAME;
+export const APP_TAGLINE = import.meta.env.VITE_APP_TAGLINE;
 export const APP_TITLE = import.meta.env.VITE_APP_TITLE;
 export const CLIENT_NAME = import.meta.env.VITE_APP_CLIENT;
 export const CLIENT_ADDRESS = import.meta.env.VITE_APP_CLIENT_ADDRESS;

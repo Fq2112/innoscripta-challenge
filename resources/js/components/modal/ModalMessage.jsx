@@ -108,7 +108,7 @@ function ModalMessage() {
       >
         <div
           ref={modalContent}
-          className="bg-white text-black dark:bg-navy-700 rounded-lg shadow-lg overflow-auto max-w-[26em] w-full max-h-full py-8 relative"
+          className="bg-white text-slate-800 dark:bg-navy-700 rounded-lg shadow-lg overflow-auto max-w-[26em] w-full max-h-full py-8 relative"
         >
           {status === "success" && (
             <AiOutlineCheckCircle className="w-28 h-28 mx-auto text-success animate-pulse" />

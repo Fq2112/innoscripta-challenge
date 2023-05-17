@@ -1,9 +1,7 @@
 import { BsEnvelopePaper, BsPhone } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
-import { BiTimeFive } from "react-icons/bi";
 import { FaPaperPlane } from "react-icons/fa";
 import {
-  SlSocialFacebook,
   SlSocialInstagram,
   SlSocialLinkedin,
   SlSocialTwitter,
@@ -21,6 +19,8 @@ import {
   CLIENT_IG,
   CLIENT_LI,
   CLIENT_TW,
+  APP_TAGLINE,
+  APP_NAME,
 } from "../../../vars/types";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
@@ -83,29 +83,25 @@ const Footer = () => {
             </Link>
 
             <p className="text-sm text-justify pt-2">
-              Since 2000, we've been helping companies of all sizes respond to
-              industry transitions in order to stay competitive. Our years of
-              experience have taught us to always make your business success our
-              priority.
+              Stay informed and up-to-date with the latest news and stories from
+              around the world by visiting us: {APP_NAME}, {APP_TAGLINE}!
             </p>
 
-            <ul className="flex gap-x-6 text-white pb-10 pt-8">
-              <a href={CLIENT_IG} target="_blank">
-                <li className="flex justify-center gap-x-2 items-center hover:bg-primary-200 hover:border-none hover:text-white cursor-pointer transition-all ease-in-out duration-300 border border-secondary-200 rounded-full w-10 h-10 hover:scale-110 hover:-translate-y-1">
-                  <SlSocialInstagram className="w-4 h-4" />
-                </li>
-              </a>
-              <a href={CLIENT_TW} target="_blank">
-                <li className="flex justify-center gap-x-2 items-center hover:bg-primary-200 hover:border-none hover:text-white cursor-pointer transition-all ease-in-out duration-300 border border-secondary-200 rounded-full w-10 h-10 hover:scale-110 hover:-translate-y-1">
-                  <SlSocialTwitter className="w-4 h-4" />
-                </li>
-              </a>
-              <a href={CLIENT_LI} target="_blank">
-                <li className="flex justify-center gap-x-2 items-center hover:bg-primary-200 hover:border-none hover:text-white cursor-pointer transition-all ease-in-out duration-300 border border-secondary-200 rounded-full w-10 h-10 hover:scale-110 hover:-translate-y-1">
-                  <SlSocialLinkedin className="w-4 h-4" />
-                </li>
-              </a>
-            </ul>
+            <div className="pt-6 pb-10">
+              <h4 className="uppercase font-semibold tracking-wide pb-3">
+                Subscribe Newsletter
+              </h4>
+              <div className="flex relative transition-all duration-300 group">
+                <input
+                  placeholder="Enter your email address..."
+                  type="email"
+                  className="w-full placeholder-slate-400 pr-12 bg-primary-900 outline-none rounded-full py-3 px-3 text-sm transition-all ease-in-out duration-300 group-hover:scale-x-105"
+                />
+                <button className="absolute right-0 flex justify-center items-center bg-primary-200 hover:opacity-70 transition-all ease-in-out duration-300 rounded-full text-white w-12 h-12  group-hover:scale-105 group-hover:-right-1">
+                  <FaPaperPlane className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* contact */}
@@ -114,48 +110,51 @@ const Footer = () => {
               <h4 className="uppercase font-semibold tracking-wide xl:pt-10">
                 get in touch
               </h4>
-              <ul className="flex flex-col divide-y divide-secondary-200/50 text-secondary-200 py-2">
+              <ul className="flex flex-col divide-y divide-slate-400/50 text-slate-400 py-2">
                 <a href={CLIENT_GMAP_DIRECTION} target="_blank">
-                  <li className="transition-all ease-in-out duration-300 hover:translate-x-1 py-3 flex gap-x-2 items-center hover:text-primary-200">
+                  <li className="transition-all ease-in-out duration-300 hover:translate-x-1 py-3 flex gap-x-2 items-center hover:text-primary-50">
                     <FiMapPin className="w-4 h-4 flex-none" />
                     {CLIENT_ADDRESS}
                   </li>
                 </a>
                 <a href={`mailto:${CLIENT_EMAIL}`}>
-                  <li className="transition-all ease-in-out duration-300 hover:translate-x-1 py-3 flex gap-x-2 items-center hover:text-primary-200">
+                  <li className="transition-all ease-in-out duration-300 hover:translate-x-1 py-3 flex gap-x-2 items-center hover:text-primary-50">
                     <BsEnvelopePaper className="w-4 h-4 flex-none" />
                     {CLIENT_EMAIL}
                   </li>
                 </a>
                 <a href={`tel:${CLIENT_PHONE}`}>
-                  <li className="transition-all ease-in-out duration-300 hover:translate-x-1 py-3 flex gap-x-2 items-center hover:text-primary-200">
+                  <li className="transition-all ease-in-out duration-300 hover:translate-x-1 py-3 flex gap-x-2 items-center hover:text-primary-50">
                     <BsPhone className="w-4 h-4 flex-none" />
                     {CLIENT_PHONE}
                   </li>{" "}
                 </a>
               </ul>
             </div>
-            <div>
-              <h4 className="uppercase font-semibold tracking-wide pb-3">
-                Subscribe Newsletter
-              </h4>
-              <div className="flex relative transition-all duration-300 group">
-                <input
-                  placeholder="Enter your email address..."
-                  type="email"
-                  className="w-full placeholder-secondary-200 pr-12 bg-primary-900 focus:outline-none rounded-full py-3 px-3 text-sm transition-all ease-in-out duration-300 group-hover:scale-x-105 focus:scale-x-105"
-                />
-                <button className="absolute right-0 flex justify-center items-center bg-primary-200 hover:opacity-70 transition-all ease-in-out duration-300 rounded-full text-white w-12 h-12  group-hover:scale-105 focused-sibling:scale-105 group-hover:-right-2 focused-sibling:-right-2">
-                  <FaPaperPlane className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
+            <ul className="flex gap-x-6 text-white pt-2">
+              <a href={CLIENT_IG} target="_blank">
+                <li className="flex justify-center gap-x-2 items-center hover:bg-primary-200 hover:border-none hover:text-white cursor-pointer transition-all ease-in-out duration-300 border border-slate-400 rounded-full w-10 h-10 hover:scale-110 hover:-translate-y-1">
+                  <SlSocialInstagram className="w-4 h-4" />
+                </li>
+              </a>
+              <a href={CLIENT_TW} target="_blank">
+                <li className="flex justify-center gap-x-2 items-center hover:bg-primary-200 hover:border-none hover:text-white cursor-pointer transition-all ease-in-out duration-300 border border-slate-400 rounded-full w-10 h-10 hover:scale-110 hover:-translate-y-1">
+                  <SlSocialTwitter className="w-4 h-4" />
+                </li>
+              </a>
+              <a href={CLIENT_LI} target="_blank">
+                <li className="flex justify-center gap-x-2 items-center hover:bg-primary-200 hover:border-none hover:text-white cursor-pointer transition-all ease-in-out duration-300 border border-slate-400 rounded-full w-10 h-10 hover:scale-110 hover:-translate-y-1">
+                  <SlSocialLinkedin className="w-4 h-4" />
+                </li>
+              </a>
+            </ul>
           </div>
 
           {/* latest blog */}
           <div
             id="google-map"
             className="gmap md:col-span-2 xl:mt-10 h-[17rem]"
+            style={{ height: "75%" }}
           >
             <GoogleMap />
           </div>

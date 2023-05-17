@@ -24,9 +24,32 @@
     font-weight: normal;
     font-style: normal;
   }
+
+  :root {
+    --main-scheme: #2e6c80;
+    --bg-scheme: #2e6c80;
+    --bg-dark-scheme: #26334d;
+    --bg-dark-inactive-scheme: #192132;
+    --border-dark-scheme: #384766;
+    --border-dark-inactive-scheme: #313e59;
+    --text-dark-scheme: #c2c9d6;
+    --danger-scheme: #dc3545;
+    --danger-dark-scheme: #bb2d3b;
+    --warning-scheme: #ffc107;
+    --warning-dark-scheme: #e2ab07;
+    --success-scheme: #198754;
+    --success-dark-scheme: #157347;
+    --secondary-scheme: #94a3b8;
+    --secondary-dark-scheme: #475569;
+    --white-scheme: #fff;
+    --white-dark-scheme: #f3f4f6;
+  }
 }
 
 @layer utilities {
+  * {
+    @apply text-[unset];
+  }
   /* ----------------------------------------------------------------
       Window Scrollbar
     -----------------------------------------------------------------*/
@@ -165,7 +188,7 @@ body {
         Breadcrumbs
   -----------------------------------------------------------------*/
 .breadcrumb {
-  @apply flex flex-wrap text-[90%] z-0;
+  @apply flex flex-wrap text-[90%] z-0 items-center;
 }
 .breadcrumb-item + .breadcrumb-item::before {
   @apply cursor-default px-2 float-left opacity-60 content-['/'];

@@ -21,11 +21,15 @@ import { Link, useLocation } from "react-router-dom";
 import { LOGO_IMG } from "../../../vars/assets";
 import { CLIENT_TW } from "../../../vars/types";
 import DefaultAction from "../../../action/DefaultAction";
+import AuthAction from "../../../action/AuthAction";
 import { A_U_CATEGORY } from "../../../vars/api";
 import dataStore from "../../../store/dataStore";
-import { W_SA_EDIT_PROFILE, W_SIGNIN } from "../../../vars/web";
+import { W_SIGNIN } from "../../../vars/web";
+import DropdownProfile from "../../../components/dropdown/DropdownProfile";
+import ModalConfirm from "../../../components/modal/ModalConfirm";
+import authStore from "../../../store/authStore";
 
-const Header = ({ menu, isMenuWhite }) => {
+const Header = ({ isMenuWhite }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [burgerAnimate, setBurgerAnimate] = useState(false);
 
@@ -35,6 +39,11 @@ const Header = ({ menu, isMenuWhite }) => {
 
   const { getData } = DefaultAction();
   const { data } = dataStore((state) => state);
+  const { token, name } = authStore((state) => state);
+
+  // signout event
+  const [noticeSignout, setNoticeSignout] = useState(false);
+  const { signoutAPI } = AuthAction();
 
   useEffect(() => {
     getData(A_U_CATEGORY, {}, {}, false);
@@ -166,14 +175,26 @@ const Header = ({ menu, isMenuWhite }) => {
             {/* logo dark */}
             {!isMenuWhite && (
               <Link to="/">
-                <img src={LOGO_IMG()} className="w-[30%] relative" alt="logo" />
+                <img
+                  src={LOGO_IMG()}
+                  className={classNames("w-[30%] relative", {
+                    "w-[35%]": token,
+                  })}
+                  alt="logo"
+                />
               </Link>
             )}
 
             {/* logo white */}
             {isMenuWhite && (
               <Link to="/">
-                <img src={LOGO_IMG()} className="w-[20%]" alt="logo" />
+                <img
+                  src={LOGO_IMG()}
+                  className={classNames("w-[20%]", {
+                    "w-[25%]": token,
+                  })}
+                  alt="logo"
+                />
               </Link>
             )}
 
@@ -207,38 +228,36 @@ const Header = ({ menu, isMenuWhite }) => {
               {data.map((e, i) => (
                 <Link
                   key={`${i}-${e.code}-menu`}
-                  to={`/${e.code}`}
+                  to={`/news/${e.code}`}
                   className={classNames(
                     "uppercase transition-all duration-300 hover:text-primary-100 hover:scale-x-105",
-                    { "text-primary-100": pathname == `/${e.code}` }
+                    { "text-primary-100": pathname.includes(`/news/${e.code}`) }
                   )}
                 >
                   {e.name}
                 </Link>
               ))}
-              <Link
-                to={W_SIGNIN}
-                className={classNames(
-                  "w-24 uppercase py-2 px-4 text-sm text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white",
-                  {
-                    "bg-primary-400 hover:bg-primary-400/70": isMenuWhite,
-                    "bg-primary-200 hover:bg-primary-200/70": !isMenuWhite,
-                  }
-                )}
-              >
-                sign in
-                <ul className="dropdown">
-                  <li className="active">
-                    <Link to={W_SA_EDIT_PROFILE}>Edit Profile</Link>
-                  </li>
-                  <li>
-                    <Link to={W_SA_EDIT_PROFILE}>Change Password</Link>
-                  </li>
-                  <li>
-                    <Link to={W_SA_EDIT_PROFILE}>Sign Out</Link>
-                  </li>
-                </ul>
-              </Link>
+              {token ? (
+                <DropdownProfile
+                  align="right"
+                  noticeSignout={noticeSignout}
+                  setNoticeSignout={setNoticeSignout}
+                  isMenuWhite={isMenuWhite}
+                />
+              ) : (
+                <Link
+                  to={W_SIGNIN}
+                  className={classNames(
+                    "w-24 uppercase py-2 px-4 text-sm text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white",
+                    {
+                      "bg-primary-400 hover:bg-primary-400/70": isMenuWhite,
+                      "bg-primary-200 hover:bg-primary-200/70": !isMenuWhite,
+                    }
+                  )}
+                >
+                  sign in
+                </Link>
+              )}
             </nav>
 
             {/* burger button */}
@@ -271,6 +290,12 @@ const Header = ({ menu, isMenuWhite }) => {
           </div>
         </div>
       </header>
+      <ModalConfirm
+        modalOpen={noticeSignout}
+        message="Are you sure to end your session?"
+        closeModal={() => setNoticeSignout(false)}
+        action={() => signoutAPI()}
+      />
     </>
   );
 };

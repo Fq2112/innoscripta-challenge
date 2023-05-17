@@ -97,8 +97,8 @@ function Password({
             className="absolute inset-0 left-auto flex items-center cursor-pointer"
             onClick={() => setShowPassword(true)}
           >
-            <span className="text-sm font-medium px-3 text-slate-300 hover:text-primary-50 transition-colors">
-              <FaEye />
+            <span className=" font-medium px-3 text-slate-300 hover:text-primary-50 transition-colors">
+              <FaEye className="w-4 h-4 flex-none" />
             </span>
           </div>
         )}
@@ -107,8 +107,8 @@ function Password({
             className="absolute inset-0 left-auto flex items-center cursor-pointer"
             onClick={() => setShowPassword(false)}
           >
-            <span className="text-sm font-medium px-3 text-slate-300 hover:text-primary-50 transition-colors">
-              <FaEyeSlash />
+            <span className=" font-medium px-3 text-slate-300 hover:text-primary-50 transition-colors">
+              <FaEyeSlash className="w-4 h-4 flex-none" />
             </span>
           </div>
         )}

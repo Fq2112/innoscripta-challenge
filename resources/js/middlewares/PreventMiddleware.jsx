@@ -43,11 +43,7 @@ function PreventMiddleware() {
 
   if (isGuest) return <Outlet />;
 
-  return (
-    <Extend>
-      <Outlet />
-    </Extend>
-  );
+  return <Outlet />;
 }
 
 export default PreventMiddleware;

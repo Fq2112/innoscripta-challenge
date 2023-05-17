@@ -66,7 +66,7 @@ function ResetPassword() {
   useEffect(() => titleScroller("Reset Password"), []);
 
   return (
-    <main className="bg-white dark:bg-navy-900">
+    <main className="text-black bg-white dark:bg-navy-900">
       <div className="relative md:flex">
         {/* Content */}
         <div className="md:w-1/2">
@@ -79,7 +79,7 @@ function ResetPassword() {
                   <img
                     src={darkMode ? LOGO_WHITE_IMG() : LOGO_IMG()}
                     alt="logo"
-                    className="mt-16 w-3/4"
+                    className="mt-16 w-[30%]"
                   />
                 </Link>
               </div>
@@ -142,7 +142,7 @@ function ResetPassword() {
                   </Link>
                   <button
                     className={classNames(
-                      "flex gap-x-1 btn bg-primary-100 hover:bg-primary-200 text-white whitespace-nowrap uppercase",
+                      "flex gap-x-1 btn bg-primary-200 hover:bg-primary-400 text-white whitespace-nowrap uppercase",
                       {
                         "opacity-75 cursor-not-allowed": loading,
                       }
