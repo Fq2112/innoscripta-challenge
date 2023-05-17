@@ -57,9 +57,9 @@ export default function Home() {
     if (!loading) {
       const check = pathname.includes("news");
 
-      if (!check && !token) navigate("/signin", { replace: true });
+      if (check && !token) navigate("/signin", { replace: true });
 
-      if (check && token) navigate("/", { replace: true });
+      if (!check && !token) navigate("/", { replace: true });
     }
   }, [loading, token, pathname]);
 

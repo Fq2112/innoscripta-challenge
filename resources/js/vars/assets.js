@@ -5,7 +5,10 @@ const URL = () =>
 
 export const AUTH_IMG = () => URL() + "/images/auth-image.jpg";
 export const AUTH2_IMG = () => URL() + "/images/auth-image2.jpg";
+export const AUTH3_IMG = () => URL() + "/images/auth-image3.jpg";
+export const AUTH4_IMG = () => URL() + "/images/auth-image4.jpg";
 export const AUTH5_IMG = () => URL() + "/images/auth-image5.jpg";
+export const AUTH6_IMG = () => URL() + "/images/auth-image6.jpg";
 export const PAPERPLANE = () => URL() + "/images/paperplane.png";
 export const ERROR_404_IMG = () => URL() + "/images/404-illustration.svg";
 export const ICON_IMG = () => URL() + "/images/icon.png";

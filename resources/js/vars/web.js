@@ -1,4 +1,5 @@
 export const W_SIGNIN = "/signin";
+export const W_SIGNUP = "/signup";
 export const W_FORGOT = "/forgot-password";
 export const W_RESET = "/reset-password";
 

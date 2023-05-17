@@ -25,11 +25,12 @@ function PreventMiddleware() {
 
   useEffect(() => {
     if (!loading) {
+      const check0 = pathname.includes("signup");
       const check1 = pathname.includes("signin");
       const check2 = pathname.includes("forgot-password");
       const check3 = pathname.includes("reset-password");
 
-      setIsGuest(check1 || check2 || check3);
+      setIsGuest(check0 || check1 || check2 || check3);
     }
     return () => {
       // unchecked selected

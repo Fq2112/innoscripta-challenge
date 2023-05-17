@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::get('/login', function (Request $request) {
 })->name('login');
 
 // main api v1
-Route::name('v1.')->prefix('v1')->group(function (): void {
+Route::prefix('v1')->group(function (): void {
     require 'v1/auth.api.php';
     require 'v1/news.api.php';
 });

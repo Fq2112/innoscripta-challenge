@@ -52,7 +52,6 @@ class VerifyEmailNotification extends Notification
      */
     public function toMail($notifiable)
     {
-
         $verificationUrl = $this->verificationUrl($notifiable);
 
         if (static::$toMailCallback) {
@@ -74,7 +73,7 @@ class VerifyEmailNotification extends Notification
             ->from(EnvHelper::get('MAIL_FROM_ADDRESS'), EnvHelper::get('MAIL_FROM_NAME'))
             ->subject(EnvHelper::get('APP_NAME') . ' Account: Verify Email')
             ->view('emails.auth.verify', [
-                'url' => $url['url'],
+                'url' => $url,
                 'email' => $notifiable->email,
             ]);
     }

@@ -6,11 +6,19 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
 import Signin from "../pages/auth/Signin";
 import NotFound from "../action/alerts/NotFound";
-import { W_HOME, W_FORGOT, W_RESET, W_SIGNIN, W_S_ACCOUNT } from "../vars/web";
+import {
+  W_HOME,
+  W_FORGOT,
+  W_RESET,
+  W_SIGNIN,
+  W_S_ACCOUNT,
+  W_SIGNUP,
+} from "../vars/web";
 import AbilityMiddleware from "../middlewares/AbilityMiddleware";
 import { ROOT_ABILITY, USER_ABILITY } from "../vars/auth";
 import Home from "../pages/news/Home";
 import AccountSettings from "../pages/settings/AccountSettings";
+import Signup from "../pages/auth/Signup";
 
 function Spa() {
   return (
@@ -19,20 +27,15 @@ function Spa() {
 
       <Route element={<AuthMiddleware />}>
         <Route element={<PreventMiddleware />}>
+          {/* auth */}
+          <Route path={W_SIGNIN} element={<Signin />} />
+          <Route path={W_SIGNUP} element={<Signup />} />
           <Route path={W_FORGOT} element={<ForgotPassword />} />
           <Route path={W_RESET} element={<ResetPassword />} />
-          {[
-            {
-              path: W_SIGNIN,
-              view: Signin,
-            },
-          ].map((e, i) => (
-            <Route key={`${i}route`} path={e.path} element={<e.view />} />
-          ))}
 
           {/* main */}
 
-          {/* SETTINGS */}
+          {/* settings */}
           <Route path={W_S_ACCOUNT} element={<AccountSettings />} />
 
           <Route path="*" element={<NotFound />} />

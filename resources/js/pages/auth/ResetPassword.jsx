@@ -12,7 +12,7 @@ import loadingStore from "../../store/loadingStore";
 import validationStore from "../../store/validationStore";
 import { titleScroller } from "../../utils/Utils";
 import {
-  AUTH5_IMG,
+  AUTH6_IMG,
   LOGO_IMG,
   LOGO_WHITE_IMG,
   PAPERPLANE,
@@ -85,16 +85,16 @@ function ResetPassword() {
               </div>
             </div>
 
-            <div className="max-w-sm mx-auto px-4 py-8">
+            <div className="max-w-lg mx-auto px-4 py-8">
               <h1 className="text-3xl text-slate-800 font-bold mb-6 dark:text-navy-100 dark:font-medium">
-                Reset your password
+                Reset your password! Please enter your new account password
               </h1>
               {/* Form */}
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="space-y-4">
                   <div>
                     <Input
-                      label="Email Address"
+                      label="Email"
                       name="email"
                       type="email"
                       register={register}
@@ -117,6 +117,7 @@ function ResetPassword() {
                         ...errors,
                         ...validation,
                       }}
+                      validation={{ required: true }}
                     />
                   </div>
                   <div>
@@ -130,19 +131,20 @@ function ResetPassword() {
                         ...errors,
                         ...validation,
                       }}
+                      validation={{ required: true }}
                     />
                   </div>
                 </div>
                 <div className="flex gap-x-2 justify-end mt-6">
                   <Link
-                    className="btn dark:bg-navy-700 dark:hover:bg-navy-600 bg-slate-200 hover:bg-slate-300 text-slate-600 dark:text-navy-100 whitespace-nowrap uppercase"
+                    className="min-w-[7rem] items-center justify-center w-fit ml-3 flex gap-x-1 uppercase py-2 px-4 text-sm text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 bg-slate-200 hover:bg-slate-200/70"
                     to={W_SIGNIN}
                   >
                     cancel
                   </Link>
                   <button
                     className={classNames(
-                      "flex gap-x-1 btn bg-primary-200 hover:bg-primary-400 text-white whitespace-nowrap uppercase",
+                      "min-w-[7rem] items-center justify-center w-fit ml-3 flex gap-x-1 uppercase py-2 px-4 text-sm text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70",
                       {
                         "opacity-75 cursor-not-allowed": loading,
                       }
@@ -167,7 +169,7 @@ function ResetPassword() {
         >
           <img
             className="object-cover object-center w-full h-full"
-            src={AUTH5_IMG()}
+            src={AUTH6_IMG()}
             width="760"
             height="1024"
             alt="Authentication"

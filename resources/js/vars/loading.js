@@ -1,5 +1,6 @@
 export const L_CHECK = "check";
 export const L_SIGNIN = "signin";
+export const L_SIGNUP = "signup";
 export const L_FORGOT = "forgot";
 export const L_RESET = "reset";
 

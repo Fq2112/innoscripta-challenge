@@ -3,7 +3,7 @@
 use App\Http\Controllers\api\NewsController;
 use Illuminate\Support\Facades\Route;
 
-Route::name('news.')->prefix('news')->group(function (): void {
+Route::name('v1.news.')->prefix('news')->group(function (): void {
     Route::controller(NewsController::class)->group(function (): void {
         Route::get('list', 'listNews')->name('list');
 

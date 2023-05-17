@@ -458,18 +458,7 @@
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td align="center">
-                                                                                                    <a href="#"
-                                                                                                        target="_blank">
-                                                                                                        <img class="social-icons"
-                                                                                                            src="https://cdn.shazam.com/shazamauth/facebook.jpg"
-                                                                                                            width="34"
-                                                                                                            height="50"
-                                                                                                            alt="facebook"
-                                                                                                            style="display:block"
-                                                                                                            border="0"></a>
-                                                                                                </td>
-                                                                                                <td align="center">
-                                                                                                    <a href="#"
+                                                                                                    <a href="{{env('APP_CLIENT_TW')}}"
                                                                                                         target="_blank">
                                                                                                         <img class="social-icons"
                                                                                                             src="https://cdn.shazam.com/shazamauth/twitter.jpg"
@@ -480,7 +469,7 @@
                                                                                                             border="0"></a>
                                                                                                 </td>
                                                                                                 <td align="center">
-                                                                                                    <a href="#"
+                                                                                                    <a href="{{env('APP_CLIENT_IG')}}"
                                                                                                         target="_blank">
                                                                                                         <img class="social-icons"
                                                                                                             src="https://cdn.shazam.com/shazamauth/instagram.jpg"
@@ -491,7 +480,7 @@
                                                                                                             border="0"></a>
                                                                                                 </td>
                                                                                                 <td align="center">
-                                                                                                    <a href="#"
+                                                                                                    <a href="{{env('APP_CLIENT_LI')}}"
                                                                                                         target="_blank">
                                                                                                         <img class="social-icons"
                                                                                                             src="https://cdn.shazam.com/shazamauth/linkedin.jpg"

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
@@ -69,6 +70,69 @@ class AuthController extends Controller
             ]);
         } catch (\Throwable $e) {
             return $this->responseconfirmedFailed($e, $this->name);
+        }
+    }
+
+    public function register(Request $request)
+    {
+        try {
+            $request->validate([
+                'name' => ['required', 'string', 'min:3', 'max:255'],
+                'username' => ['required', 'string', 'min:3', 'max:30', 'unique:m_users,username'],
+                'email' => ['required', 'string', 'email', 'max:100', 'unique:m_users,email'],
+                'password' => ['required', 'string', "min:8"],
+                'password_confirmation' => ['required', 'same:password'],
+            ]);
+
+            $data = $request->only([
+                'name',
+                'username',
+                'email',
+                'password',
+            ]);
+            $data['is_active'] = true;
+            $data['password'] = bcrypt($request->password);
+            $data['role_code'] = UserRole::$USER;
+
+            DB::beginTransaction();
+            $userVar = User::create($data);
+            $userVar->sendEmailVerificationNotification();
+            DB::commit();
+
+            return $this->responseCustomSuccess('Signed up! Please check your email to verify your account.');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return $this->responseCreatedFailed($e, 'user');
+        }
+    }
+
+    public function verify(Request $request, $id, $hash)
+    {
+        try {
+            $request->request->add(['hash' => $hash]);
+            if (!$request->hasValidSignature()) {
+                return response()->json(["msg" => "Invalid/Expired url provided."], 401);
+            }
+
+            /**
+             * @var mixed $user
+             */
+            $user = User::findOrFail($id);
+
+            if ($user->hasVerifiedEmail()) {
+                return [
+                    'message' => 'Email already verified'
+                ];
+            }
+
+            if ($user->markEmailAsVerified()) {
+                event(new Verified($user));
+                $user->update(['email_verified_at' => now()]);
+            }
+
+            return redirect()->to('/signin?verified=1');
+        } catch (\Throwable $e) {
+            return $this->responseconfirmedFailed($e, 'user');
         }
     }
 

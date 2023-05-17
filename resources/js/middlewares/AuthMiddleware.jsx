@@ -43,14 +43,15 @@ function AuthMiddleware() {
 
   useEffect(() => {
     if (!loading) {
+      const check0 = pathname.includes("signup");
       const check1 = pathname.includes("signin");
       const check2 = pathname.includes("forgot-password");
       const check3 = pathname.includes("reset-password");
 
-      if (!check1 && !check2 && !check3 && !token)
+      if (!check0 && !check1 && !check2 && !check3 && !token)
         navigate("/signin", { replace: true });
 
-      if ((check1 || check2 || check3) && token)
+      if ((check0 || check1 || check2 || check3) && token)
         navigate("/", { replace: true });
     }
   }, [loading, token, pathname]);

@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import AuthAction from "../../action/AuthAction";
 import loadingStore from "../../store/loadingStore";
 import validationStore from "../../store/validationStore";
-import { L_SIGNIN } from "../../vars/loading";
+import { L_SIGNUP } from "../../vars/loading";
 import { titleScroller } from "../../utils/Utils";
 import { BiLoaderAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import {
-  AUTH_IMG,
+  AUTH2_IMG,
   LOGO_IMG,
   LOGO_WHITE_IMG,
   PAPERPLANE,
@@ -16,13 +16,11 @@ import {
 import Input from "../../components/form/Input";
 import Password from "../../components/form/Password";
 import classNames from "classnames";
-import { W_FORGOT, W_HOME, W_SIGNUP } from "../../vars/web";
+import { W_HOME, W_SIGNIN } from "../../vars/web";
 import darkModeStore from "../../store/darkModeStore";
 import { APP_NAME } from "../../vars/types";
-import messageStore from "../../store/messageStore";
-import { searchParamsToObj } from "../../helpers/UrlHelper";
 
-function Signin() {
+function Signup() {
   const {
     register,
     formState: { errors },
@@ -30,39 +28,17 @@ function Signin() {
   } = useForm();
 
   const { loading: getLoading } = loadingStore((state) => state);
-  const loading = useMemo(() => getLoading[L_SIGNIN], [getLoading]);
+  const loading = useMemo(() => getLoading[L_SIGNUP], [getLoading]);
 
   const { validation } = validationStore((state) => state);
-  const { setMessage } = messageStore((state) => state);
 
-  const { signinAPI } = AuthAction();
+  const { signupAPI } = AuthAction();
 
   const { show: darkMode } = darkModeStore((state) => state);
 
   const onSubmit = (e) => {
-    if (!loading) signinAPI(e);
+    if (!loading) signupAPI(e);
   };
-
-  const [params, setParams] = useState({});
-
-  useEffect(() => {
-    const { verified } = location?.search
-      ? searchParamsToObj(location.search)
-      : {};
-    if (verified) setParams({ verified });
-  }, []);
-
-  useEffect(() => {
-    if (params.verified == 1)
-      setMessage({
-        showModal: true,
-        data: {
-          title: "Success",
-          subtitle: "Verified! Please sign in to your account.",
-          status: "success",
-        },
-      });
-  }, [params]);
 
   useEffect(() => titleScroller("Sign In"), []);
 
@@ -88,44 +64,92 @@ function Signin() {
 
             <div className="max-w-lg mx-auto px-4 py-8">
               <h1 className="text-3xl text-slate-800 font-bold mb-6 dark:text-navy-100 dark:font-medium">
-                Welcome back! Please sign in to your {APP_NAME} Account
+                Create your {APP_NAME} Account! Please fill out properly
               </h1>
               {/* Form */}
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="space-y-4">
                   <div>
                     <Input
-                      label="Email / Username"
-                      name="email"
+                      label="Full Name"
+                      name="name"
                       register={register}
                       errors={{
                         ...errors,
                         ...validation,
                       }}
-                      placeholder="Enter your username or email"
+                      placeholder="Enter your full name"
+                      validation={{ required: true }}
                     />
                   </div>
-                  <div className="relative">
-                    <Password
-                      label="Password"
-                      name="password"
-                      register={register}
-                      errors={{
-                        ...errors,
-                        ...validation,
-                      }}
-                      preventHoverBorder={true}
-                      placeholder="Enter your password"
-                    />
+                  <div className="grid grid-cols-2 gap-x-4">
+                    <div>
+                      <Input
+                        label="Username"
+                        name="username"
+                        register={register}
+                        errors={{
+                          ...errors,
+                          ...validation,
+                        }}
+                        placeholder="Enter your username"
+                        validation={{ required: true }}
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        label="Email"
+                        name="email"
+                        type="email"
+                        register={register}
+                        errors={{
+                          ...errors,
+                          ...validation,
+                        }}
+                        placeholder="Enter your email"
+                        validation={{ required: true, email: true }}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-4">
+                    <div className="relative">
+                      <Password
+                        label="Password"
+                        name="password"
+                        register={register}
+                        errors={{
+                          ...errors,
+                          ...validation,
+                        }}
+                        preventHoverBorder={true}
+                        placeholder="Enter your password"
+                        validation={{ required: true }}
+                      />
+                    </div>
+                    <div className="relative">
+                      <Password
+                        label="Password Confirmation"
+                        name="password_confirmation"
+                        register={register}
+                        errors={{
+                          ...errors,
+                          ...validation,
+                        }}
+                        preventHoverBorder={true}
+                        placeholder="Retype your password"
+                        validation={{ required: true }}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="flex items-center justify-between mt-6">
                   <div className="mr-1">
+                    Have an account?{" "}
                     <Link
-                      className="text-sm hover:text-primary-100 dark:text-navy-100 dark:hover:text-primary-100"
-                      to={W_FORGOT}
+                      className="font-medium text-primary-200 hover:text-primary-500"
+                      to={W_SIGNIN}
                     >
-                      Forgot password?
+                      Sign In
                     </Link>
                   </div>
                   <button
@@ -137,25 +161,13 @@ function Signin() {
                     )}
                     type="submit"
                   >
-                    Sign In
+                    Sign Up
                     {loading && (
                       <BiLoaderAlt className="animate-spin fill-current opacity-50 flex-none h-4 w-4" />
                     )}
                   </button>
                 </div>
               </form>
-
-              <div className="pt-5 mt-6 border-t border-gray-200">
-                <div className="text-sm">
-                  Don't you have an account?{" "}
-                  <Link
-                    className="font-medium text-primary-200 hover:text-primary-500"
-                    to={W_SIGNUP}
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -167,7 +179,7 @@ function Signin() {
         >
           <img
             className="object-cover object-center w-full h-full"
-            src={AUTH_IMG()}
+            src={AUTH2_IMG()}
             width="760"
             height="1024"
             alt="Authentication"
@@ -185,4 +197,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default Signup;

@@ -7,6 +7,7 @@ export const DEFAULT_URL_API = () => OTHER_URL_API();
 // auth
 const auth = "/v1/auth";
 export const A_SIGNIN = `${auth}/login`;
+export const A_SIGNUP = `${auth}/register`;
 export const A_FORGOT = `${auth}/forgot-password`;
 export const A_RESET = `${auth}/reset-password`;
 export const A_SIGNOUT = `${auth}/logout`;
