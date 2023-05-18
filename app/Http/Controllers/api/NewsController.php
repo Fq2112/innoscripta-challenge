@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\LogNewsDate;
 use App\Models\News;
 use App\Models\NewsAuthor;
+use App\Models\NewsCategory;
 use App\Models\NewsSource;
 use App\Traits\apiResponseTrait;
 use Carbon\Carbon;
@@ -20,12 +21,79 @@ class NewsController extends Controller
     use apiResponseTrait;
 
     private $name;
+    private $nameCategory;
     private $model;
+    private $modelCategory;
 
     public function __construct()
     {
         $this->name = __('vars.models.News');
+        $this->nameCategory = __('vars.models.NewsCategory');
         $this->model = new News();
+        $this->modelCategory = new NewsCategory();
+    }
+
+    /**
+     * get news category for header menu
+     *
+     * @return [{"code": "category_code", "name": "category_name"}]
+     */
+    public function menuNews()
+    {
+        try {
+            $data = $this->modelCategory->query()
+                ->select('code', 'name')
+                ->orderBy('name')
+                ->get();
+
+            return  $this->responseLoadDataSuccess(data: $data, name: $this->modelCategory);
+        } catch (\Throwable $e) {
+            return $this->responseLoadDataFailed(exception: $e, name: $this->modelCategory);
+        }
+    }
+
+    /**
+     * get news list for hero
+     *
+     * @return [{ "id": "", "title": "", "description": "", "content": "", "permalink": "", "url": "", "url_to_image": "", "published_at": "", "source_code": "", "source_name": "", "source_desc": "", "source_url": "", "language_code": "", "country_code": "", "category_code": "", "category_name": "", "author_code": "", "author_name": ""}]
+     */
+    public function heroNews()
+    {
+        try {
+            $data = $this->model->newsList()->whereNotNull('mn.url_to_image')->get()->random(4);
+
+            return $this->responseLoadDataSuccess($data, $this->name);
+        } catch (\Throwable $e) {
+            return $this->responseLoadDataFailed($e, $this->name);
+        }
+    }
+
+    /**
+     * get user prefered news category
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function preferedNewsCategory()
+    {
+        try {
+            $result = $this->modelCategory->query()
+                ->select('code', 'name')
+                ->orderBy('name')
+                ->get();
+                
+            $user = request()->user();
+            $newsPreferences = $user->getUserNewsPreferences;
+            if ($newsPreferences) {
+                $setCat = $newsPreferences->category_codes;
+                if ($setCat && count($setCat) > 0) {
+                    $result = NewsCategory::select('code', 'name')->whereIn('code', $setCat)->get()->toArray();
+                }
+            }
+
+            return $this->responseLoadDataSuccess($result, $this->name);
+        } catch (\Throwable $e) {
+            return $this->responseLoadDataFailed($e, $this->name);
+        }
     }
 
     /**

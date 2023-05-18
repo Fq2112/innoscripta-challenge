@@ -58,7 +58,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply w-2 bg-primary-800 hover:bg-primary-900 transition-all ease-in-out duration-300 rounded-[5px];
+    @apply w-2 bg-primary-500 hover:bg-primary-600 transition-all ease-in-out duration-300 rounded-[5px];
   }
 
   .custom-scrollbar::-webkit-scrollbar {

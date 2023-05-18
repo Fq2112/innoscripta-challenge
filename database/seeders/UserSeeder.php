@@ -4,8 +4,12 @@ namespace Database\Seeders;
 
 use App\Helpers\AllFileInDirectoryHelper;
 use App\Models\Branch;
+use App\Models\NewsAuthor;
+use App\Models\NewsCategory;
+use App\Models\NewsSource;
 use App\Models\User;
 use App\Models\UserInformation;
+use App\Models\UserNewsPreferences;
 use App\Models\UserRole;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -111,6 +115,16 @@ class UserSeeder extends Seeder
             "address" => $faker->address,
             "created_at" => now(),
             "updated_at" => now(),
+        ]);
+
+        $category = NewsCategory::all()->random(5);
+        $source = NewsSource::all()->random(5);
+        $author = NewsAuthor::all()->random(5);
+        UserNewsPreferences::create([
+            'user_id' => $user->id,
+            'category_codes' => count($category) > 0 ? $category->pluck('code')->toArray() : null,
+            'source_codes' => count($source) > 0 ? $source->pluck('code')->toArray() : null,
+            'author_codes' => count($author) > 0 ? $author->pluck('code')->toArray() : null,
         ]);
     }
 }

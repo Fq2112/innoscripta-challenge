@@ -22,7 +22,7 @@ function DefaultAction() {
   const { setLoading } = loadingStore((state) => state);
   const { setMessage } = messageStore((state) => state);
   const { resetParams } = paramsStore((state) => state);
-  const { setNoPaginate, setPaginate, deleteDetail, setAccessable, setDetail, setIsNotFound } =
+  const { setMenuData, setNoPaginate, setPaginate, deleteDetail, setAccessable, setDetail, setIsNotFound } =
     dataStore((state) => state);
   const { useFetch } = FetchHelper();
 
@@ -42,6 +42,26 @@ function DefaultAction() {
         usePaginate ? setPaginate(e) : setNoPaginate(e);
       },
     //   otherOn: (data, status) => otherOn(data, status),
+      showMsgSuccess: false,
+      messageOn: (e) =>
+        setMessage({
+          showModal: true,
+          data: e,
+        }),
+    });
+  };
+
+  const getMenuData = async (
+    path,
+    params = {},
+  ) => {
+    await useFetch({
+      url: path + objToParams(params),
+      useToken: true,
+      method: "GET",
+      validationDataOn: (e) => setValidation(e),
+      loadingOn: (e) => setLoading({ [L_DATA]: e }),
+      succesOn: (e) => setMenuData(e),
       showMsgSuccess: false,
       messageOn: (e) =>
         setMessage({
@@ -255,6 +275,7 @@ function DefaultAction() {
 
   return {
     getData,
+    getMenuData,
     deleteData,
     deleteMultiData,
     generateData,

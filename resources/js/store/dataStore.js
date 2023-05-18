@@ -3,6 +3,7 @@ import ZustandHelper from "../helpers/ZustandHelper";
 
 const init = {
   lock: null,
+  menuData: [],
   data: [],
   currentPage: 1,
   lastPage: 1,
@@ -35,6 +36,12 @@ const setup = (set, get) => ({
   setDeleteId: (deleteId) => set({ deleteId }),
   // dispatch open modal delete data
   resetdeleteId: () => set({ deleteId: null }),
+  // set menu data
+  setMenuData: (e) => {
+    set({
+      menuData: e,
+    });
+  },
   // set data without paginate
   setNoPaginate: (e) => {
     set({

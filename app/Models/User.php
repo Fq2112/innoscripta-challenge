@@ -233,6 +233,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserInformation::class, 'user_id');
     }
 
+    public function getUserNewsPreferences()
+    {
+        return $this->hasOne(UserNewsPreferences::class, 'user_id');
+    }
+
     public function role()
     {
         return $this->hasOne(UserRole::class, 'code', 'role_code')->select('code', 'name');

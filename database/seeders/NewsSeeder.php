@@ -40,7 +40,7 @@ class NewsSeeder extends Seeder
                         $authors = [...$authors, ...collect($arr)->filter(fn ($q) => !in_array($q, $existingAuthor->toArray()) && $q)->map(fn ($q, $i) => [
                             'name' => $q ? $q : 'anonymous',
                             'source_code' => $val,
-                            'code' => 'AU-' . str()->padLeft($count + $i+1, 6, '0').str()->random(rand(4,10)),
+                            'code' => 'AU-' . str()->padLeft($count + $i+1, 3, '0').str()->random(rand(4,10)),
                             'created_at' => now(),
                             'updated_at' => now(),
                         ])->unique('name')->toArray()];

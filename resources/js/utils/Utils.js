@@ -36,6 +36,11 @@ export const formatThousands = (value) =>
     notation: "compact",
   }).format(value);
 
+export const wordLimit = (string, maxLength = 30) => {
+  const index = string.indexOf(" ", maxLength);
+  return index === -1 ? string : string.substring(0, index);
+};
+
 export const titleScroller = (page_name = null) => {
   let title = page_name ? `${page_name} | ${APP_TITLE}` : APP_TITLE,
     seTime;

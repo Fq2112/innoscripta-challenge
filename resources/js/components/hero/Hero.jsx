@@ -12,10 +12,12 @@ import "swiper/css/thumbs";
 import { Autoplay, FreeMode, Navigation, Thumbs } from "swiper";
 import TabContent from "./TabContent";
 import Overlay from "./Overlay";
-import { FaSquare } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { FaClock, FaEdit } from "react-icons/fa";
+import { setDateFormat } from "../../helpers/DateHelper";
+import { wordLimit } from "../../utils/Utils";
+import { BsNewspaper } from "react-icons/bs";
 
-const Hero = () => {
+const Hero = ({ data }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const progressContent = useRef(null);
@@ -66,152 +68,62 @@ const Hero = () => {
         onAutoplayTimeLeft={onAutoplayTimeLeft}
         className="mySwiper2"
       >
-        <SwiperSlide>
-          <Overlay src="/images/hero-slider/1.jpeg">
-            <div className="flex flex-col gap-y-2 uppercase text-left pt-[10rem]">
-              <h3 className="text-2xl font-semibold">Hello and Welcome to</h3>
-              <h1 className="text-5xl font-extrabold tracking-wider text-primary-200">
-                ssss
-              </h1>
-              <div className="bg-secondary-800/70 py-2 px-3 tracking-wide relative w-fit">
-                <h2 className="w-full text-lg font-semibold">xxxx</h2>
-              </div>
-              <ul className="flex flex-col gap-y-2 pt-2 pb-6 font-light text-lg">
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  Roof Plumbing Estimating
-                </li>
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  Plumbing Estimating
-                </li>
-              </ul>
-              <Link
-                to="#about"
-                onClick={linkTo}
-                className="w-48 uppercase p-3 text-lg text-center font-bold rounded-full hover-box-shadow transition-all ease-in-out duration-300 hover:scale-x-105 text-white bg-primary-200 hover:bg-primary-200/70"
-              >
-                Learn More
-              </Link>
-            </div>
-          </Overlay>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Overlay src="/images/hero-slider/2.jpeg">
-            <div className="flex flex-col gap-y-2 uppercase text-left pt-[10rem]">
-              <h3 className="text-2xl font-semibold">
-                Do you need a Full-time Estimator?
-              </h3>
-              <h1 className="text-5xl font-extrabold tracking-wider">
-                <span className="text-primary-200">xxxxxx</span> is here to:
-              </h1>
-              <ul className="flex flex-col gap-y-2 pt-2 pb-6 font-light text-lg">
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  support Start-up and medium-sized construction and plumbing
-                  companies that need a full-time estimator
-                </li>
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  provide cost-effective and efficient estimating solutions
-                </li>
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  Allowing you to maximize profitability while we're handling
-                  the estimation process
-                </li>
-              </ul>
-              <Link
-                to="#services"
-                onClick={linkTo}
-                className="w-48 uppercase p-3 text-lg text-center font-bold rounded-full hover-box-shadow transition-all ease-in-out duration-300 hover:scale-x-105 text-white bg-primary-200 hover:bg-primary-200/70"
-              >
-                Learn More
-              </Link>
-            </div>
-          </Overlay>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Overlay src="/images/hero-slider/3.jpeg">
-            <div className="flex flex-col gap-y-2 uppercase text-left pt-[10rem]">
-              <h3 className="text-2xl font-semibold">
-                Do you feel frustrated with time management?
-              </h3>
-              <h1 className="text-5xl font-extrabold tracking-wider">
-                <span className="text-primary-200">zczxczxc</span> also here
-                to:
-              </h1>
-              <ul className="flex flex-col gap-y-2 pt-2 pb-6 font-light text-lg">
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  support Start-up businesses that struggling to balancing time
-                  between quoting jobs and managing them
-                </li>
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  provide a solution that alleviate your frustration and
-                  streamline your workflow
-                </li>
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  Allowing you to focus on what you do the best for growing your
-                  business
-                </li>
-              </ul>
-              <Link
-                to="#services"
-                onClick={linkTo}
-                className="w-48 uppercase p-3 text-lg text-center font-bold rounded-full hover-box-shadow transition-all ease-in-out duration-300 hover:scale-x-105 text-white bg-primary-200 hover:bg-primary-200/70"
-              >
-                Learn More
-              </Link>
-            </div>
-          </Overlay>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Overlay src="/images/hero-slider/4.jpeg" flip={true}>
-            <div className="flex flex-col gap-y-2 uppercase text-left pt-[10rem]">
-              <h3 className="text-2xl font-semibold">
-                Do you want to scale up your business?
-              </h3>
-              <h1 className="text-5xl font-extrabold tracking-wider">
-                <span className="text-primary-200">zxczxczxc</span> is the
-                answer!
-              </h1>
-              <ul className="flex flex-col gap-y-2 pt-2 pb-6 font-light text-lg">
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  We provide comprehensive solutions that will bridging the gap
-                  between limited knowledge of technology and proper management
-                  processes
-                </li>
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  We can also provide you with the necessary guidance,
-                  expertise, and resources to navigate the challenges of
-                  business growth, optimize your operations, and leverage
-                  technology to streamline your processes and increase your
-                  bottom line
-                </li>
-                <li className="flex gap-x-2 items-center hover:text-primary-200 transition-all ease-in-out duration-300 hover:translate-x-1">
-                  <FaSquare className="w-3 h-3 flex-none text-primary-200 rotate-45" />
-                  Allowing you to scale up your Start-up business and become
-                  more profitable
-                </li>
-              </ul>
-              <Link
-                to="#surveyors"
-                onClick={linkTo}
-                className="w-48 uppercase p-3 text-lg text-center font-bold rounded-full hover-box-shadow transition-all ease-in-out duration-300 hover:scale-x-105 text-white bg-primary-200 hover:bg-primary-200/70"
-              >
-                Learn More
-              </Link>
-            </div>
-          </Overlay>
-        </SwiperSlide>
+        {data &&
+          data.map((e) => (
+            <SwiperSlide key={`${e.id}-content`}>
+              <Overlay src={e.url_to_image}>
+                <div className="flex flex-col gap-y-2 text-left pt-[10rem]">
+                  <h3 className="flex gap-x-2 items-center text-lg font-semibold">
+                    <FaClock className="w-4 h-4 flex-none text-slate-400" />
+                    {setDateFormat({
+                      date: e.published_at,
+                      withTime: true,
+                      withWeekDay: true,
+                    })}
+                  </h3>
+                  <h1 className="text-5xl font-extrabold tracking-wider text-primary-50">
+                    {e.title}
+                  </h1>
+                  <div className="bg-secondary-800/70 py-2 px-3 tracking-wide relative w-fit">
+                    <h2 className="w-full text-lg font-semibold">
+                      {e.description}
+                    </h2>
+                  </div>
+                  <ul className="flex flex-col gap-y-1 pt-2 pb-6 font-light text-base">
+                    <li className="flex gap-x-2 items-center">
+                      <FaEdit className="w-4 h-4 flex-none text-slate-400" />
+                      <div className="flex gap-x-1">
+                        by
+                        <span className="font-medium">
+                          {e.author_name ? e.author_name : "Anonymous"}
+                        </span>
+                      </div>
+                    </li>
+                    <li className="flex gap-x-2 items-center">
+                      <BsNewspaper className="w-4 h-4 flex-none text-slate-400" />
+                      <div className="flex gap-x-1">
+                        from
+                        <a
+                          href={e.source_url}
+                          target="_blank"
+                          className="font-medium text-primary-50 transition-all hover:text-primary-500 duration-300"
+                        >
+                          {e.source_name ? e.source_name : "Anonymous"}
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                  <a
+                    href={e.url}
+                    target="_blank"
+                    className="w-48 uppercase p-3 text-lg text-center font-bold rounded-full hover-box-shadow transition-all ease-in-out duration-300 hover:scale-x-105 text-white bg-primary-200 hover:bg-primary-200/70"
+                  >
+                    Read More
+                  </a>
+                </div>
+              </Overlay>
+            </SwiperSlide>
+          ))}
 
         {/* progress line top*/}
         <div
@@ -229,34 +141,16 @@ const Hero = () => {
         modules={[FreeMode, Navigation, Thumbs]}
         className="container !mx-auto mySwiper"
       >
-        <SwiperSlide>
-          <TabContent
-            number={1}
-            title={"Featured Services"}
-            subtitle={"Expert Estimator"}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TabContent
-            number={2}
-            title={"Lack of Resources"}
-            subtitle={"Full-time Estimator"}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TabContent
-            number={3}
-            title={"Frustrate of Managing Time"}
-            subtitle={"Quoting & Managing Jobs"}
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <TabContent
-            number={4}
-            title={"Scaling Up Business"}
-            subtitle={"Become More Profitable"}
-          />
-        </SwiperSlide>
+        {data &&
+          data.map((e, i) => (
+            <SwiperSlide key={`${e.id}-pagination`}>
+              <TabContent
+                number={i + 1}
+                title={e.title.length > 15 ? `${wordLimit(e.title, 15)}...` : e.title}
+                subtitle={`${e.category_name}, ${e.source_name}`}
+              />
+            </SwiperSlide>
+          ))}
 
         {/* current mark line*/}
         <div

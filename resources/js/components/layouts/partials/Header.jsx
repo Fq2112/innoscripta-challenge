@@ -22,7 +22,7 @@ import { LOGO_IMG } from "../../../vars/assets";
 import { CLIENT_TW } from "../../../vars/types";
 import DefaultAction from "../../../action/DefaultAction";
 import AuthAction from "../../../action/AuthAction";
-import { A_U_CATEGORY } from "../../../vars/api";
+import { A_NEWS_MENU, A_NEWS_PREFERED_CATEGORY } from "../../../vars/api";
 import dataStore from "../../../store/dataStore";
 import { W_SIGNIN } from "../../../vars/web";
 import DropdownProfile from "../../../components/dropdown/DropdownProfile";
@@ -37,8 +37,8 @@ const Header = ({ isMenuWhite }) => {
   const location = useLocation();
   const { pathname } = location;
 
-  const { getData } = DefaultAction();
-  const { data } = dataStore((state) => state);
+  const { getMenuData } = DefaultAction();
+  const { menuData } = dataStore((state) => state);
   const { token, name } = authStore((state) => state);
 
   // signout event
@@ -46,8 +46,12 @@ const Header = ({ isMenuWhite }) => {
   const { signoutAPI } = AuthAction();
 
   useEffect(() => {
-    getData(A_U_CATEGORY, {}, {}, false);
+    getMenuData(A_NEWS_MENU, {}, {}, false);
   }, []);
+
+  useEffect(() => {
+    getMenuData(token ? A_NEWS_PREFERED_CATEGORY : A_NEWS_MENU, {}, {}, false);
+  }, [token]);
 
   //   switch show menu burger to true
   useEffect(() => {
@@ -177,9 +181,7 @@ const Header = ({ isMenuWhite }) => {
               <Link to="/">
                 <img
                   src={LOGO_IMG()}
-                  className={classNames("w-[30%] relative", {
-                    "w-[35%]": token,
-                  })}
+                  className="w-full h-20"
                   alt="logo"
                 />
               </Link>
@@ -190,9 +192,7 @@ const Header = ({ isMenuWhite }) => {
               <Link to="/">
                 <img
                   src={LOGO_IMG()}
-                  className={classNames("w-[20%]", {
-                    "w-[25%]": token,
-                  })}
+                  className="w-full h-14"
                   alt="logo"
                 />
               </Link>
@@ -225,7 +225,7 @@ const Header = ({ isMenuWhite }) => {
                 Home
               </Link>
 
-              {data.map((e, i) => (
+              {menuData.map((e, i) => (
                 <Link
                   key={`${i}-${e.code}-menu`}
                   to={`/news/${e.code}`}

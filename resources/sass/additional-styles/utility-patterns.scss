@@ -84,6 +84,12 @@ input[type="search"]::-webkit-search-results-decoration {
     @apply leading-5 py-2 px-3 border-slate-200 hover:border-slate-300 focus:border-indigo-300 shadow-sm;
 }
 
+.form-input.no-padding {
+    padding: 0 !important;
+    border-color: transparent !important;
+    box-shadow: none;
+}
+
 .form-input,
 .form-textarea {
     @apply placeholder-slate-400;

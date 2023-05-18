@@ -148,7 +148,7 @@ const SelectAsync = ({
           : state.isFocused || state.isHovered
           ? "var(--white-dark-scheme)"
           : "#fff",
-        padding: "0 1rem",
+        padding: ".5rem 1rem",
         "&:active": {
           color: "#fff",
           backgroundColor: "var(--main-scheme)",
@@ -257,7 +257,7 @@ const SelectAsync = ({
               setValueMulti(e ? e.map((e) => e.value) : []);
             }}
             isMulti={true}
-            className={"form-input"}
+            className={`form-input ${setClass}`}
             classNamePrefix="select"
             placeholder={placeholder}
             menuPosition="fixed"

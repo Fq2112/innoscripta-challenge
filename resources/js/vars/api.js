@@ -18,6 +18,9 @@ export const A_UPDATE_PROFILE = `${auth}/update-profile`;
 
 // news
 const news = "/v1/news";
+export const A_NEWS_MENU = `${news}/menu`;
+export const A_NEWS_PREFERED_CATEGORY = `${news}/prefered-category`;
+export const A_NEWS_HERO = `${news}/hero`;
 export const A_NEWS_LIST = `${news}/list`;
 export const A_NEWS_SYNC = `${news}/sync`;
 

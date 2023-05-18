@@ -10,30 +10,42 @@ import validationStore from "../../store/validationStore";
 import {
   FORM_CHANGE_PASSWORD,
   FORM_EDIT_PROFILE,
+  FORM_PREFERENCES_CATEGORY,
+  FORM_PREFERENCES_AUTHOR,
+  FORM_PREFERENCES_SOURCE,
   FORM_UPDATE_PROFILE,
 } from "../../vars/formName";
 import loadingStore from "../../store/loadingStore";
 import DefaultAction from "../../action/DefaultAction";
 import dataStore from "../../store/dataStore";
-import { L_DETAIL, L_S_GENDER } from "../../vars/loading";
+import {
+  L_DETAIL,
+  L_S_AUTHOR,
+  L_S_CATEGORY,
+  L_S_GENDER,
+  L_S_SOURCE,
+} from "../../vars/loading";
 import {
   A_CHANGE_PASSWORD,
   A_EDIT_PROFILE,
   A_UPDATE_PROFILE,
+  A_U_AUTHOR,
+  A_U_CATEGORY,
   A_U_GENDER,
+  A_U_SOURCE,
 } from "../../vars/api";
 import LoadingForm from "../../components/LoadingForm";
 import FormButton from "../../components/button/FormButton";
 import classNames from "classnames";
-import { FaAsterisk, FaUserEdit } from "react-icons/fa";
+import { FaUserEdit } from "react-icons/fa";
 import authStore from "../../store/authStore";
 import InputFile from "../../components/form/InputFile";
 import SelectAsync from "../../components/form/SelectAsync";
 import TextArea from "../../components/form/TextArea";
 import { objSelectTo } from "../../helpers/ObjHelper";
 import Extend from "../../components/layouts/Extend";
-import { FaUserCog } from "react-icons/fa";
 import { BsIncognito } from "react-icons/bs";
+import { objSelectFrom } from "../../helpers/ObjHelper";
 
 function AccountSettings() {
   const {
@@ -47,17 +59,34 @@ function AccountSettings() {
   // API FUNC
   const { selectData, sendData, detailData } = DefaultAction();
 
-  const [isProfile, setisProfile] = useState(false);
+  const [isProfile, setisProfile] = useState(true);
 
   // LOAD VALIDATION FROM ZUUSTAND
   const { validation } = validationStore((state) => state);
 
-  const { details: getDetails, setDetail } = dataStore((state) => state);
+  const {
+    details: getDetails,
+    setDetail,
+    menuData,
+    setMenuData,
+  } = dataStore((state) => state);
   const { setAuthData } = authStore((state) => state);
 
   // DATA EDIT FROM ZUUSTAND
   const details = useMemo(
     () => getDetails[FORM_EDIT_PROFILE] ?? {},
+    [getDetails]
+  );
+  const prefCategory = useMemo(
+    () => getDetails[FORM_PREFERENCES_CATEGORY] ?? [],
+    [getDetails]
+  );
+  const prefSource = useMemo(
+    () => getDetails[FORM_PREFERENCES_SOURCE] ?? [],
+    [getDetails]
+  );
+  const prefAuthor = useMemo(
+    () => getDetails[FORM_PREFERENCES_AUTHOR] ?? [],
     [getDetails]
   );
 
@@ -116,6 +145,7 @@ function AccountSettings() {
           res.photo = e.photo;
         }
         setAuthData(res);
+        setMenuData(e.category);
       },
     });
   };
@@ -297,7 +327,10 @@ function AccountSettings() {
                                   setValue={(e) => setValue("gender", e)}
                                   onChange={(e) => {
                                     setDetail({
-                                      [FORM_EDIT_PROFILE]: { gender: e.value },
+                                      [FORM_EDIT_PROFILE]: {
+                                        ...(details[FORM_EDIT_PROFILE] ?? {}),
+                                        gender: e.value,
+                                      },
                                     });
                                     updateValue("gender", e, true);
                                   }}
@@ -341,199 +374,121 @@ function AccountSettings() {
                             setFocus={setFocus}
                           >
                             <div className="py-4 space-y-4">
-                              {/* sources */}
-                              <div className="flex flex-col gap-y-1">
-                                {/* header */}
-                                <div className="flex items-center gap-x-2">
-                                  <input
-                                    id="cb_sources"
-                                    type="checkbox"
-                                    className="form-checkbox cursor-pointer"
-                                    name="cb_sources"
-                                    //   value={e.value}
-                                    //   onChange={(e) => {
-                                    //     onChange(e);
-                                    //     setValue(name, e.target.value);
-                                    //   }}
-                                  />
-                                  <label
-                                    className="flex font-medium cursor-pointer uppercase"
-                                    htmlFor="cb_sources"
-                                  >
-                                    Sources
-                                  </label>
-                                </div>
-                                {/* detail */}
-                                <div className="flex flex-col ml-6">
-                                  <div className="flex items-center gap-x-2">
-                                    <input
-                                      id="cb-source-1"
-                                      type="checkbox"
-                                      className="form-checkbox cursor-pointer"
-                                      name="cb_sources"
-                                      //   value={e.value}
-                                      //   onChange={(e) => {
-                                      //     onChange(e);
-                                      //     setValue(name, e.target.value);
-                                      //   }}
-                                    />
-                                    <label
-                                      className="text-sm font-medium cursor-pointer"
-                                      htmlFor="cb-source-1"
-                                    >
-                                      Source A
-                                    </label>
-                                  </div>
-                                  <div className="flex items-center gap-x-2">
-                                    <input
-                                      id="cb-source-2"
-                                      type="checkbox"
-                                      className="form-checkbox cursor-pointer"
-                                      name="cb_sources"
-                                      //   value={e.value}
-                                      //   onChange={(e) => {
-                                      //     onChange(e);
-                                      //     setValue(name, e.target.value);
-                                      //   }}
-                                    />
-                                    <label
-                                      className="text-sm font-medium cursor-pointer"
-                                      htmlFor="cb-source-2"
-                                    >
-                                      Source B
-                                    </label>
-                                  </div>
-                                </div>
+                              {/* category */}
+                              <div>
+                                <SelectAsync
+                                  setClass="no-padding"
+                                  defaultValueMulti={(prefCategory.length
+                                    ? prefCategory
+                                    : details?.preferences?.category
+                                    ? details?.preferences?.category
+                                    : []
+                                  ).map((e) =>
+                                    prefCategory.length ? objSelectTo(e) : e
+                                  )}
+                                  placeholder="-- Select Categories --"
+                                  name="category"
+                                  isMulti={true}
+                                  preventLabel={false}
+                                  label="News Category"
+                                  register={register}
+                                  isLoading={getLoading[L_S_CATEGORY]}
+                                  loadAPI={(search, cb) =>
+                                    selectData({
+                                      path: A_U_CATEGORY,
+                                      search,
+                                      loadingVar: L_S_CATEGORY,
+                                      cb,
+                                    })
+                                  }
+                                  setValueMulti={(e) => setValue("category", e)}
+                                  onChange={(e) => {
+                                    setDetail({
+                                      [FORM_PREFERENCES_CATEGORY]: e.map((v) =>
+                                        objSelectFrom(v)
+                                      ),
+                                    });
+                                    updateValue("category", e, true);
+                                  }}
+                                />
                               </div>
 
-                              {/* categories */}
-                              <div className="flex flex-col gap-y-1">
-                                {/* header */}
-                                <div className="flex items-center gap-x-2">
-                                  <input
-                                    id="cb_categories"
-                                    type="checkbox"
-                                    className="form-checkbox cursor-pointer"
-                                    name="cb_categories"
-                                    //   value={e.value}
-                                    //   onChange={(e) => {
-                                    //     onChange(e);
-                                    //     setValue(name, e.target.value);
-                                    //   }}
-                                  />
-                                  <label
-                                    className="flex font-medium cursor-pointer uppercase"
-                                    htmlFor="cb_categories"
-                                  >
-                                    categories
-                                  </label>
-                                </div>
-                                {/* detail */}
-                                <div className="flex flex-col ml-6">
-                                  <div className="flex items-center gap-x-2">
-                                    <input
-                                      id="cb-category-1"
-                                      type="checkbox"
-                                      className="form-checkbox cursor-pointer"
-                                      name="cb_categories"
-                                      //   value={e.value}
-                                      //   onChange={(e) => {
-                                      //     onChange(e);
-                                      //     setValue(name, e.target.value);
-                                      //   }}
-                                    />
-                                    <label
-                                      className="text-sm font-medium cursor-pointer"
-                                      htmlFor="cb-category-1"
-                                    >
-                                      Category A
-                                    </label>
-                                  </div>
-                                  <div className="flex items-center gap-x-2">
-                                    <input
-                                      id="cb-category-2"
-                                      type="checkbox"
-                                      className="form-checkbox cursor-pointer"
-                                      name="cb_categories"
-                                      //   value={e.value}
-                                      //   onChange={(e) => {
-                                      //     onChange(e);
-                                      //     setValue(name, e.target.value);
-                                      //   }}
-                                    />
-                                    <label
-                                      className="text-sm font-medium cursor-pointer"
-                                      htmlFor="cb-category-2"
-                                    >
-                                      Category B
-                                    </label>
-                                  </div>
-                                </div>
+                              {/* source */}
+                              <div>
+                                <SelectAsync
+                                  setClass="no-padding"
+                                  defaultValueMulti={(prefSource.length
+                                    ? prefSource
+                                    : details?.preferences?.source
+                                    ? details?.preferences?.source
+                                    : []
+                                  ).map((e) =>
+                                    prefSource.length ? objSelectTo(e) : e
+                                  )}
+                                  placeholder="-- Select Sources --"
+                                  name="source"
+                                  isMulti={true}
+                                  preventLabel={false}
+                                  label="News Source"
+                                  register={register}
+                                  isLoading={getLoading[L_S_SOURCE]}
+                                  loadAPI={(search, cb) =>
+                                    selectData({
+                                      path: A_U_SOURCE,
+                                      search,
+                                      loadingVar: L_S_SOURCE,
+                                      cb,
+                                    })
+                                  }
+                                  setValueMulti={(e) => setValue("source", e)}
+                                  onChange={(e) => {
+                                    setDetail({
+                                      [FORM_PREFERENCES_SOURCE]: e.map((v) =>
+                                        objSelectFrom(v)
+                                      ),
+                                    });
+                                    updateValue("source", e, true);
+                                  }}
+                                />
                               </div>
 
-                              {/* authors */}
-                              <div className="flex flex-col gap-y-1">
-                                {/* header */}
-                                <div className="flex items-center gap-x-2">
-                                  <input
-                                    id="cb_authors"
-                                    type="checkbox"
-                                    className="form-checkbox cursor-pointer"
-                                    name="cb_authors"
-                                    //   value={e.value}
-                                    //   onChange={(e) => {
-                                    //     onChange(e);
-                                    //     setValue(name, e.target.value);
-                                    //   }}
-                                  />
-                                  <label
-                                    className="flex font-medium cursor-pointer uppercase"
-                                    htmlFor="cb_authors"
-                                  >
-                                    authors
-                                  </label>
-                                </div>
-                                {/* detail */}
-                                <div className="flex flex-col ml-6">
-                                  <div className="flex items-center gap-x-2">
-                                    <input
-                                      id="cb-author-1"
-                                      type="checkbox"
-                                      className="form-checkbox cursor-pointer"
-                                      name="cb_authors"
-                                      //   value={e.value}
-                                      //   onChange={(e) => {
-                                      //     onChange(e);
-                                      //     setValue(name, e.target.value);
-                                      //   }}
-                                    />
-                                    <label
-                                      className="text-sm font-medium cursor-pointer"
-                                      htmlFor="cb-author-1"
-                                    >
-                                      Author A
-                                    </label>
-                                  </div>
-                                  <div className="flex items-center gap-x-2">
-                                    <input
-                                      id="cb-author-2"
-                                      type="checkbox"
-                                      className="form-checkbox cursor-pointer"
-                                      name="cb_authors"
-                                      //   value={e.value}
-                                      //   onChange={(e) => {
-                                      //     onChange(e);
-                                      //     setValue(name, e.target.value);
-                                      //   }}
-                                    />
-                                    <label
-                                      className="text-sm font-medium cursor-pointer"
-                                      htmlFor="cb-author-2"
-                                    >
-                                      Author B
-                                    </label>
-                                  </div>
-                                </div>
+                              {/* author */}
+                              <div>
+                                <SelectAsync
+                                  setClass="no-padding"
+                                  defaultValueMulti={(prefAuthor.length
+                                    ? prefAuthor
+                                    : details?.preferences?.author
+                                    ? details?.preferences?.author
+                                    : []
+                                  ).map((e) =>
+                                    prefAuthor.length ? objSelectTo(e) : e
+                                  )}
+                                  placeholder="-- Select Authors --"
+                                  name="author"
+                                  isMulti={true}
+                                  preventLabel={false}
+                                  label="News Author"
+                                  register={register}
+                                  isLoading={getLoading[L_S_AUTHOR]}
+                                  loadAPI={(search, cb) =>
+                                    selectData({
+                                      path: A_U_AUTHOR,
+                                      search,
+                                      loadingVar: L_S_AUTHOR,
+                                      cb,
+                                    })
+                                  }
+                                  setValueMulti={(e) => setValue("author", e)}
+                                  onChange={(e) => {
+                                    setDetail({
+                                      [FORM_PREFERENCES_AUTHOR]: e.map((v) =>
+                                        objSelectFrom(v)
+                                      ),
+                                    });
+                                    updateValue("author", e, true);
+                                  }}
+                                />
                               </div>
                             </div>
                           </AccordionList>

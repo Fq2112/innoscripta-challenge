@@ -195,7 +195,7 @@ const Footer = () => {
         <div
           className={classNames(
             "h-full transition duration-500 ease-in-out w-full bg-primary-400",
-            { "bg-primary-900": scrollTop > 99 }
+            { "bg-primary-500": scrollTop > 99 }
           )}
           style={{ width: `${scrollTop}%` }}
         ></div>

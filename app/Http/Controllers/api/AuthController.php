@@ -7,8 +7,12 @@ use App\Helpers\EnvHelper;
 use App\Helpers\ImageHelper;
 use App\Helpers\StringHelper;
 use App\Http\Controllers\Controller;
+use App\Models\NewsAuthor;
+use App\Models\NewsCategory;
+use App\Models\NewsSource;
 use App\Models\User;
 use App\Models\UserInformation;
+use App\Models\UserNewsPreferences;
 use App\Models\UserRole;
 use App\Traits\apiResponseTrait;
 use Illuminate\Http\Request;
@@ -359,6 +363,41 @@ class AuthController extends Controller
                 ];
             }
 
+            $category = [];
+            $source = [];
+            $author = [];
+            $newsPreferences = $user->getUserNewsPreferences;
+            if ($newsPreferences) {
+                $setCat = $newsPreferences->category_codes;
+                if ($setCat && count($setCat) > 0) {
+                    $category = collect(NewsCategory::whereIn('code', $setCat)->get())->map(fn ($q) => [
+                        'label' => $q->name,
+                        'value' => $q->code,
+                    ]);
+                }
+
+                $setSource = $newsPreferences->source_codes;
+                if ($setSource && count($setSource) > 0) {
+                    $source = collect(NewsSource::whereIn('code', $setSource)->get())->map(fn ($q) => [
+                        'label' => $q->name,
+                        'value' => $q->code,
+                    ]);
+                }
+
+                $setAuthor = $newsPreferences->author_codes;
+                if ($setAuthor && count($setAuthor) > 0) {
+                    $author = collect(NewsAuthor::whereIn('code', $setAuthor)->get())->map(fn ($q) => [
+                        'label' => $q->name,
+                        'value' => $q->code,
+                    ]);
+                }
+            }
+            $result["preferences"] = [
+                "category" => $category,
+                "source" => $source,
+                "author" => $author,
+            ];
+
             return $this->responseLoadDataSuccess($result, $this->nameUserInformation);
         } catch (\Throwable $e) {
             return $this->responseLoadDataFailed($e, $this->nameUserInformation);
@@ -403,6 +442,23 @@ class AuthController extends Controller
 
                 $compress = $helper->imageCompress($img, $ext);
                 Storage::put(UserInformation::$photoSavePath . $name, $compress);
+            }
+
+            // save news preferences
+            if ($request->has(['category', 'source', 'author'])) {
+                $category = NewsCategory::select('code', 'name')->whereIn('code', explode(',', $request->category))->get();
+                $source = NewsSource::select('code', 'name')->whereIn('code', explode(',', $request->source))->get();
+                $author = NewsAuthor::select('code', 'name')->whereIn('code', explode(',', $request->author))->get();
+
+                UserNewsPreferences::updateOrCreate([
+                    'user_id' => $user->id,
+                ], [
+                    'category_codes' => count($category) > 0 ? $category->pluck('code')->toArray() : null,
+                    'source_codes' => count($source) > 0 ? $source->pluck('code')->toArray() : null,
+                    'author_codes' => count($author) > 0 ? $author->pluck('code')->toArray() : null,
+                ]);
+
+                $data['category'] = count($category) > 0 ? $category->toArray() : NewsCategory::select('code', 'name')->get()->toArray();
             }
 
             $user->update(['name' => $request->name]);
