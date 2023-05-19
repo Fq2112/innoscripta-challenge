@@ -5,6 +5,8 @@ const init = {
   lock: null,
   menuData: [],
   data: [],
+  heroData: [],
+  feedsData: [],
   currentPage: 1,
   lastPage: 1,
   from: null,
@@ -40,6 +42,18 @@ const setup = (set, get) => ({
   setMenuData: (e) => {
     set({
       menuData: e,
+    });
+  },
+  // set hero data
+  setHeroData: (e) => {
+    set({
+      heroData: e,
+    });
+  },
+  // set feeds data
+  setFeedsData: (e) => {
+    set({
+      feedsData: e,
     });
   },
   // set data without paginate

@@ -13,12 +13,14 @@ import {
   W_SIGNIN,
   W_S_ACCOUNT,
   W_SIGNUP,
+  W_NEWS_FEEDS,
 } from "../vars/web";
 import AbilityMiddleware from "../middlewares/AbilityMiddleware";
 import { ROOT_ABILITY, USER_ABILITY } from "../vars/auth";
 import Home from "../pages/news/Home";
 import AccountSettings from "../pages/settings/AccountSettings";
 import Signup from "../pages/auth/Signup";
+import Feeds from "../pages/news/Feeds";
 
 function Spa() {
   return (
@@ -34,6 +36,7 @@ function Spa() {
           <Route path={W_RESET} element={<ResetPassword />} />
 
           {/* main */}
+          <Route path={W_NEWS_FEEDS} element={<Feeds />} />
 
           {/* settings */}
           <Route path={W_S_ACCOUNT} element={<AccountSettings />} />

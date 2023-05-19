@@ -13,6 +13,7 @@ use App\Traits\apiResponseTrait;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use jcobhams\NewsApi\NewsApi;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,21 +35,27 @@ class NewsController extends Controller
     }
 
     /**
-     * get news category for header menu
+     * get user prefered news category
      *
-     * @return [{"code": "category_code", "name": "category_name"}]
+     * @return \Illuminate\Http\Response
      */
-    public function menuNews()
+    public function preferedNewsCategory()
     {
         try {
-            $data = $this->modelCategory->query()
-                ->select('code', 'name')
-                ->orderBy('name')
-                ->get();
+            $result = NewsCategory::select('code', 'name');
 
-            return  $this->responseLoadDataSuccess(data: $data, name: $this->modelCategory);
+            $user = request()->user();
+            $newsPreferences = $user->getUserNewsPreferences;
+            if ($newsPreferences) {
+                $setCat = $newsPreferences->category_codes;
+                if ($setCat && count($setCat) > 0) {
+                    $result = $result->whereIn('code', $setCat);
+                }
+            }
+
+            return $this->responseLoadDataSuccess($result->get()->toArray(), $this->name);
         } catch (\Throwable $e) {
-            return $this->responseLoadDataFailed(exception: $e, name: $this->modelCategory);
+            return $this->responseLoadDataFailed($e, $this->name);
         }
     }
 
@@ -60,7 +67,7 @@ class NewsController extends Controller
     public function heroNews()
     {
         try {
-            $data = $this->model->newsList()->whereNotNull('mn.url_to_image')->get()->random(4);
+            $data = $this->model->newsList()->get()->random(4);
 
             return $this->responseLoadDataSuccess($data, $this->name);
         } catch (\Throwable $e) {
@@ -69,25 +76,66 @@ class NewsController extends Controller
     }
 
     /**
-     * get user prefered news category
+     * get news feeds all category
      *
      * @return \Illuminate\Http\Response
      */
-    public function preferedNewsCategory()
+    public function feedsNews(Request $request)
     {
         try {
-            $result = $this->modelCategory->query()
-                ->select('code', 'name')
-                ->orderBy('name')
+            $category = $request->category;
+
+            $cat = NewsCategory::select('code', 'name')
+                ->when($category, function ($q) use ($category) {
+                    $q->where('code', $category);
+                })
                 ->get();
-                
+            $result = [];
+            foreach ($cat as $val) {
+                $result[$val->code] = $this->model->newsList()->where('mnc.code', $val->code);
+                if (!$category) {
+                    $result[$val->code] = $result[$val->code]->limit(4);
+                }
+                $result[$val->code] =  $result[$val->code]->get()->toArray();
+            }
+
+            return $this->responseLoadDataSuccess($result, $this->name);
+        } catch (\Throwable $e) {
+            return $this->responseLoadDataFailed($e, $this->name);
+        }
+    }
+
+    /**
+     * get user prefered news feeds
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function preferedNewsFeeds(Request $request)
+    {
+        try {
+            $category = $request->category;
+
+            $cat = NewsCategory::select('code', 'name')->when($category, function ($q) use ($category) {
+                $q->where('code', $category);
+            });
             $user = request()->user();
             $newsPreferences = $user->getUserNewsPreferences;
             if ($newsPreferences) {
                 $setCat = $newsPreferences->category_codes;
                 if ($setCat && count($setCat) > 0) {
-                    $result = NewsCategory::select('code', 'name')->whereIn('code', $setCat)->get()->toArray();
+                    $cat = $cat->when($category, function ($q) use ($category) {
+                        $q->where('code', $category);
+                    })->whereIn('code', $setCat);
                 }
+            }
+
+            $result = [];
+            foreach ($cat->get() as $i => $val) {
+                $result[$val->code] = $this->model->newsList()->where('mnc.code', $val->code);
+                if (!$category) {
+                    $result[$val->code] = $result[$val->code]->limit(4);
+                }
+                $result[$val->code] =  $result[$val->code]->get()->toArray();
             }
 
             return $this->responseLoadDataSuccess($result, $this->name);

@@ -5,6 +5,7 @@ export const W_RESET = "/reset-password";
 
 // news
 export const W_HOME = "/";
+export const W_NEWS_FEEDS = "/news/:code";
 
 // support
 export const W_WA_LINK = "https://wa.me/6281356598237";

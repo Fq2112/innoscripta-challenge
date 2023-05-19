@@ -22,7 +22,7 @@ import { LOGO_IMG } from "../../../vars/assets";
 import { CLIENT_TW } from "../../../vars/types";
 import DefaultAction from "../../../action/DefaultAction";
 import AuthAction from "../../../action/AuthAction";
-import { A_NEWS_MENU, A_NEWS_PREFERED_CATEGORY } from "../../../vars/api";
+import { A_NEWS_PREFERED_CATEGORY, A_U_CATEGORY } from "../../../vars/api";
 import dataStore from "../../../store/dataStore";
 import { W_SIGNIN } from "../../../vars/web";
 import DropdownProfile from "../../../components/dropdown/DropdownProfile";
@@ -46,11 +46,7 @@ const Header = ({ isMenuWhite }) => {
   const { signoutAPI } = AuthAction();
 
   useEffect(() => {
-    getMenuData(A_NEWS_MENU, {}, {}, false);
-  }, []);
-
-  useEffect(() => {
-    getMenuData(token ? A_NEWS_PREFERED_CATEGORY : A_NEWS_MENU, {}, {}, false);
+    getMenuData(token ? A_NEWS_PREFERED_CATEGORY : A_U_CATEGORY, {}, {}, false);
   }, [token]);
 
   //   switch show menu burger to true
@@ -179,22 +175,14 @@ const Header = ({ isMenuWhite }) => {
             {/* logo dark */}
             {!isMenuWhite && (
               <Link to="/">
-                <img
-                  src={LOGO_IMG()}
-                  className="w-full h-20"
-                  alt="logo"
-                />
+                <img src={LOGO_IMG()} className="w-full h-20" alt="logo" />
               </Link>
             )}
 
             {/* logo white */}
             {isMenuWhite && (
               <Link to="/">
-                <img
-                  src={LOGO_IMG()}
-                  className="w-full h-14"
-                  alt="logo"
-                />
+                <img src={LOGO_IMG()} className="w-full h-14" alt="logo" />
               </Link>
             )}
 

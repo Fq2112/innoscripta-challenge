@@ -16,6 +16,7 @@ import { FaClock, FaEdit } from "react-icons/fa";
 import { setDateFormat } from "../../helpers/DateHelper";
 import { wordLimit } from "../../utils/Utils";
 import { BsNewspaper } from "react-icons/bs";
+import { AUTH3_IMG } from "../../vars/assets";
 
 const Hero = ({ data }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -71,7 +72,7 @@ const Hero = ({ data }) => {
         {data &&
           data.map((e) => (
             <SwiperSlide key={`${e.id}-content`}>
-              <Overlay src={e.url_to_image}>
+              <Overlay src={e.url_to_image ? e.url_to_image : AUTH3_IMG()}>
                 <div className="flex flex-col gap-y-2 text-left pt-[10rem]">
                   <h3 className="flex gap-x-2 items-center text-lg font-semibold">
                     <FaClock className="w-4 h-4 flex-none text-slate-400" />
@@ -146,7 +147,9 @@ const Hero = ({ data }) => {
             <SwiperSlide key={`${e.id}-pagination`}>
               <TabContent
                 number={i + 1}
-                title={e.title.length > 15 ? `${wordLimit(e.title, 15)}...` : e.title}
+                title={
+                  e.title.length > 15 ? `${wordLimit(e.title, 15)}...` : e.title
+                }
                 subtitle={`${e.category_name}, ${e.source_name}`}
               />
             </SwiperSlide>

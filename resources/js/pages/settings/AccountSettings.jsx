@@ -89,6 +89,7 @@ function AccountSettings() {
     () => getDetails[FORM_PREFERENCES_AUTHOR] ?? [],
     [getDetails]
   );
+  const [preferred, setPreferred] = useState([]);
 
   // LOAD LOADING FROM ZUUSTAND
   const { loading: getLoading } = loadingStore((state) => state);
@@ -378,13 +379,19 @@ function AccountSettings() {
                               <div>
                                 <SelectAsync
                                   setClass="no-padding"
-                                  defaultValueMulti={(prefCategory.length
+                                  defaultValueMulti={(preferred.includes(
+                                    FORM_PREFERENCES_CATEGORY
+                                  ) || prefCategory.length
                                     ? prefCategory
                                     : details?.preferences?.category
                                     ? details?.preferences?.category
                                     : []
                                   ).map((e) =>
-                                    prefCategory.length ? objSelectTo(e) : e
+                                    preferred.includes(
+                                      FORM_PREFERENCES_CATEGORY
+                                    ) || prefCategory.length
+                                      ? objSelectTo(e)
+                                      : e
                                   )}
                                   placeholder="-- Select Categories --"
                                   name="category"
@@ -408,6 +415,10 @@ function AccountSettings() {
                                         objSelectFrom(v)
                                       ),
                                     });
+                                    setPreferred([
+                                      ...preferred,
+                                      FORM_PREFERENCES_CATEGORY,
+                                    ]);
                                     updateValue("category", e, true);
                                   }}
                                 />
@@ -417,13 +428,19 @@ function AccountSettings() {
                               <div>
                                 <SelectAsync
                                   setClass="no-padding"
-                                  defaultValueMulti={(prefSource.length
+                                  defaultValueMulti={(preferred.includes(
+                                    FORM_PREFERENCES_SOURCE
+                                  ) || prefSource.length
                                     ? prefSource
                                     : details?.preferences?.source
                                     ? details?.preferences?.source
                                     : []
                                   ).map((e) =>
-                                    prefSource.length ? objSelectTo(e) : e
+                                    preferred.includes(
+                                      FORM_PREFERENCES_SOURCE
+                                    ) || prefSource.length
+                                      ? objSelectTo(e)
+                                      : e
                                   )}
                                   placeholder="-- Select Sources --"
                                   name="source"
@@ -447,6 +464,10 @@ function AccountSettings() {
                                         objSelectFrom(v)
                                       ),
                                     });
+                                    setPreferred([
+                                      ...preferred,
+                                      FORM_PREFERENCES_SOURCE,
+                                    ]);
                                     updateValue("source", e, true);
                                   }}
                                 />
@@ -456,13 +477,19 @@ function AccountSettings() {
                               <div>
                                 <SelectAsync
                                   setClass="no-padding"
-                                  defaultValueMulti={(prefAuthor.length
+                                  defaultValueMulti={(preferred.includes(
+                                    FORM_PREFERENCES_AUTHOR
+                                  ) || prefAuthor.length
                                     ? prefAuthor
                                     : details?.preferences?.author
                                     ? details?.preferences?.author
                                     : []
                                   ).map((e) =>
-                                    prefAuthor.length ? objSelectTo(e) : e
+                                    preferred.includes(
+                                      FORM_PREFERENCES_AUTHOR
+                                    ) || prefAuthor.length
+                                      ? objSelectTo(e)
+                                      : e
                                   )}
                                   placeholder="-- Select Authors --"
                                   name="author"
@@ -486,6 +513,10 @@ function AccountSettings() {
                                         objSelectFrom(v)
                                       ),
                                     });
+                                    setPreferred([
+                                      ...preferred,
+                                      FORM_PREFERENCES_AUTHOR,
+                                    ]);
                                     updateValue("author", e, true);
                                   }}
                                 />
