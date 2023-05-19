@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import dataStore from "../../store/dataStore";
-import { titleScroller, wordLimit } from "../../utils/Utils";
+import { titleScroller } from "../../utils/Utils";
 import Extend from "../../components/layouts/Extend";
 import EmptyState from "../../components/others/EmptyState";
 import LoadingForm from "../../components/LoadingForm";
@@ -15,6 +15,7 @@ import { A_NEWS_FEEDS, A_NEWS_PREFERED_FEEDS } from "../../vars/api";
 import { AUTH3_IMG } from "../../vars/assets";
 import PageTitle from "../../components/layouts/partials/PageTitle";
 import { setDateFormat } from "../../helpers/DateHelper";
+import { W_NEWS } from "../../vars/web";
 
 export default function Feeds() {
   const [updateLock] = useState("feeds");
@@ -48,7 +49,11 @@ export default function Feeds() {
       {/* page title */}
       <PageTitle
         title="News Feeds"
-        links={[{ name: "Home", url: "/" }, { name: "News" }, { name: code }]}
+        links={[
+          { name: "Home", url: "/" },
+          { name: "News", url: W_NEWS },
+          { name: code },
+        ]}
         imageUrl="/images/page-title/news.jpg"
       />
 
@@ -68,7 +73,8 @@ export default function Feeds() {
                 <span className="text-primary-200 uppercase">{code}</span> News
               </h2>
               <h4 className="w-fit mx-auto text-xl">
-                Stay Informed and Empowered with the Latest <span className="capitalize">{code}</span> News
+                Stay Informed and Empowered with the Latest{" "}
+                <span className="capitalize">{code}</span> News
               </h4>
             </div>
 
@@ -83,7 +89,7 @@ export default function Feeds() {
                       image={v.url_to_image ? v.url_to_image : AUTH3_IMG()}
                       title={v.title}
                       subtitle={v.description}
-                      url={v.permalink}
+                      url={`/news/detail/${v.permalink}`}
                       date={setDateFormat({
                         date: v.published_at,
                         withTime: true,

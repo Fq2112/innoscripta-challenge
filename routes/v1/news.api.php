@@ -12,6 +12,7 @@ Route::name('v1.news.')->prefix('news')->group(function (): void {
             Route::get('list', 'listNews')->name('list');
             Route::get('prefered-category', 'preferedNewsCategory')->name('prefered.category');
             Route::get('prefered-feeds', 'preferedNewsFeeds')->name('prefered.feeds');
+            Route::get('detail/{permalink}', 'detailNews')->name('detail');
         });
         Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('sync', 'syncNews')->name('sync');

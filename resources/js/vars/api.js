@@ -20,6 +20,7 @@ export const A_UPDATE_PROFILE = `${auth}/update-profile`;
 const news = "/v1/news";
 export const A_NEWS_HERO = `${news}/hero`;
 export const A_NEWS_FEEDS = `${news}/feeds`;
+export const A_NEWS_DETAIL = `${news}/detail`;
 export const A_NEWS_PREFERED_CATEGORY = `${news}/prefered-category`;
 export const A_NEWS_PREFERED_FEEDS = `${news}/prefered-feeds`;
 export const A_NEWS_LIST = `${news}/list`;

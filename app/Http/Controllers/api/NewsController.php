@@ -145,6 +145,22 @@ class NewsController extends Controller
     }
 
     /**
+     * get news detail
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detailNews($permalink)
+    {
+        try {
+            $result = $this->model->newsList()->where('mn.permalink', $permalink)->first();
+
+            return $this->responseLoadDataSuccess($result, $this->name);
+        } catch (\Throwable $e) {
+            return $this->responseLoadDataFailed($e, $this->name);
+        }
+    }
+
+    /**
      * get news list
      *
      * @param string $q (?q=news_title|news_description|news_content)

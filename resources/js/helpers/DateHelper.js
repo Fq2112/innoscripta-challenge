@@ -29,6 +29,7 @@ export const setDateFormat = ({
   withWeekDay = false,
   withTime = false,
 }) => {
+  if (!date) date = new Date();
   const d = new Date(date);
   let opt = {
     year: "numeric",

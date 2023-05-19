@@ -17,6 +17,7 @@ import { setDateFormat } from "../../helpers/DateHelper";
 import { wordLimit } from "../../utils/Utils";
 import { BsNewspaper } from "react-icons/bs";
 import { AUTH3_IMG } from "../../vars/assets";
+import { Link } from "react-router-dom";
 
 const Hero = ({ data }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -114,13 +115,12 @@ const Hero = ({ data }) => {
                       </div>
                     </li>
                   </ul>
-                  <a
-                    href={e.url}
-                    target="_blank"
+                  <Link
+                    to={`/news/detail/${e.permalink}`}
                     className="w-48 uppercase p-3 text-lg text-center font-bold rounded-full hover-box-shadow transition-all ease-in-out duration-300 hover:scale-x-105 text-white bg-primary-200 hover:bg-primary-200/70"
                   >
                     Read More
-                  </a>
+                  </Link>
                 </div>
               </Overlay>
             </SwiperSlide>

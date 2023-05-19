@@ -129,7 +129,7 @@ export default function Home() {
                             ? `${wordLimit(v.description, 80)}...`
                             : v.description
                         }
-                        url={v.permalink}
+                        url={`/news/detail/${v.permalink}`}
                         date={setDateFormat({
                           date: v.published_at,
                           withTime: true,
