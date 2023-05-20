@@ -1,66 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Innoscripta Challenge: NewsHub - See the World Closer
+![Innoscripta](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/innoscripta-logo.png "Logo Innoscripta")
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+#### This is an application that allow users to Stay Informed and Empowered with the Latest News and personalize it.
 
-## About Laravel
+### Built With
+* [Laravel v10.8](https://laravel.com/docs/10.x)
+* [React JS v18.2](https://react.dev/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [Vite v4.0](https://vitejs.dev/)
+* [MySQL v15.1](https://dev.mysql.com/doc/)
+* [NewsAPI v2](https://newsapi.org/docs)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Getting Started
+Follow this step guide to prepare the requirement system before using the apps
+1. Download and install [Composer](https://getcomposer.org/)
+2. Download and install [NodeJS](https://nodejs.org/en/download)
+3. Clone this repo
+    ```sh
+   git clone https://github.com/Fq2112/innoscripta-challenge.git
+   ```
+3. Install the composer required packages
+    ```sh
+   composer install
+   ```
+4. Install the node required packages
+    ```sh
+   npm i
+   ```
+   or if using yarn
+    ```sh
+   yarn install
+   ```
+5. Copy ``.env.example`` file and rename it to ``.env`` 
+6. Adjust ``.env`` file based on your device environment and don't forget to put your Mailtrap credentials and the NewsAPI key as well
+7. Make sure your mysql is run properly and run this command
+    ```sh
+   php artisan migrate:fresh --seed
+   ```
+8. Run the backend
+    ```sh
+   php artisan serve
+   ```
+9. Open new terminal session without closing the previous one and run this command
+    ```sh
+   npm run dev
+   ```
+   or if using yarn
+    ```sh
+   yarn run dev
+   ```
+10. Open it on your browser
+    ```sh
+   http://localhost:8000
+   ```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Overview
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### A. Authentication
+1. ![Signup](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Signup.png "Signup")
+2. ![Verify](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Verify.png "Verify")
+3. ![Signin](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Signin.png "Signin")
+4. ![Forgot Password](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Forgot-Password.png "Forgot Password")
+5. ![Recovery Password](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Recovery-Password.png "Recovery Password")
+6. ![Reset Password](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Reset-Password.png "Reset Password")
 
-## Learning Laravel
+### B. Home
+1. ![Home (Hero)](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Home-Hero.png "Home (Hero)")
+2. ![Home (Feeds)](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Home-Feeds.png "Home (Feeds)")
+3. ![Footer](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Footer.png "Footer")
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### C. News
+1. ![Search News](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Search-News.png "Search News")
+2. ![Pagination](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Pagination.png "Pagination")
+3. ![News Detail (top)](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/News-Detail-top.png "News Detail (top)")
+4. ![News Detail (bottom)](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/News-Detail-bottom.png "News Detail (bottom)")
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### D. Account Settings
+1. ![Account Settings](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Account-Settings.png "Account Settings")
+2. ![Edit Profile](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Edit-Profile.png "Edit Profile")
+3. ![News Preferences](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/News-Preferences.png "News Preferences")
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### E. Mobile View
+1. ![Mobile View (Home)](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Mobile-View-Home.png "Mobile View (Home)")
+2. ![Mobile View (Feeds)](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Mobile-View-Feeds.png "Mobile View (Feeds)")
+3. ![Mobile View (News Detail)](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Mobile-View-News-Detail.png "Mobile View (News Detail)")
