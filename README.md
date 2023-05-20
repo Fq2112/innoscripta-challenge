@@ -11,6 +11,11 @@
 * [MySQL v15.1](https://dev.mysql.com/doc/)
 * [NewsAPI v2](https://newsapi.org/docs)
 
+### Prerequisites
+
+In order to run this prroject you should have `Docker` and `Docker Compose` installed on your local machine.
+Just in case, you don't feel like to use the docker you can just follow the instruction bellow.
+
 ## Getting Started
 Follow this step guide to prepare the requirement system before using the apps
 1. Download and install [Composer](https://getcomposer.org/)
@@ -81,3 +86,27 @@ Follow this step guide to prepare the requirement system before using the apps
 1. ![Mobile View (Home)](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Mobile-View-Home.png "Mobile View (Home)")
 2. ![Mobile View (Feeds)](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Mobile-View-Feeds.png "Mobile View (Feeds)")
 3. ![Mobile View (News Detail)](https://raw.githubusercontent.com/Fq2112/innoscripta-challenge/master/public/images/overview/Mobile-View-News-Detail.png "Mobile View (News Detail)")
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` file for more information.
+
+<p align="right">(<a href="#readme">back to top</a>)</p>
