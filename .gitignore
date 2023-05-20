@@ -1,3 +1,4 @@
 .env
 docker/logs/*
 docker/mysql/*
+*.DS_Store
