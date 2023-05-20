@@ -24,7 +24,7 @@ import DefaultAction from "../../../action/DefaultAction";
 import AuthAction from "../../../action/AuthAction";
 import { A_NEWS_PREFERED_CATEGORY, A_U_CATEGORY } from "../../../vars/api";
 import dataStore from "../../../store/dataStore";
-import { W_SIGNIN } from "../../../vars/web";
+import { W_NEWS, W_SIGNIN } from "../../../vars/web";
 import DropdownProfile from "../../../components/dropdown/DropdownProfile";
 import ModalConfirm from "../../../components/modal/ModalConfirm";
 import authStore from "../../../store/authStore";
@@ -213,10 +213,20 @@ const Header = ({ isMenuWhite }) => {
                 Home
               </Link>
 
+              <Link
+                to={W_NEWS}
+                className={classNames(
+                  "uppercase transition-all duration-300 hover:text-primary-100 hover:scale-x-105",
+                  { "text-primary-100": pathname.includes("/news") }
+                )}
+              >
+                News
+              </Link>
+
               {menuData.map((e, i) => (
                 <Link
                   key={`${i}-${e.code}-menu`}
-                  to={`/news/${e.code}`}
+                  to={`/news?category=${e.code}`}
                   className={classNames(
                     "uppercase transition-all duration-300 hover:text-primary-100 hover:scale-x-105",
                     { "text-primary-100": pathname.includes(`/news/${e.code}`) }

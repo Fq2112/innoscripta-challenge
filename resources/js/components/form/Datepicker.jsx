@@ -48,8 +48,8 @@ function Datepicker({
       <Flatpickr
         ref={fp}
         className={classNames(
-          "form-input pl-9 text-slate-500 hover:text-slate-600 font-medium focus:border-slate-300",
-          { "w-full": widthFull, "w-60": !widthFull }
+          "form-input !pl-9 !text-slate-500 !hover:text-slate-600 !font-medium focus:border-slate-300",
+          { "w-full": widthFull, "w-72": !widthFull }
         )}
         options={options}
       />

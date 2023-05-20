@@ -116,7 +116,7 @@ const Hero = ({ data }) => {
                     </li>
                   </ul>
                   <Link
-                    to={`/news/detail/${e.permalink}`}
+                    to={`/news/${e.category_code}/${e.permalink}`}
                     className="w-48 uppercase p-3 text-lg text-center font-bold rounded-full hover-box-shadow transition-all ease-in-out duration-300 hover:scale-x-105 text-white bg-primary-200 hover:bg-primary-200/70"
                   >
                     Read More

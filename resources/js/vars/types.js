@@ -7,6 +7,8 @@ export const DATA_PARAMS = [
   "order",
   "start_date_range",
   "end_date_range",
+  "category",
+  "source"
 ];
 export const KEY_PARAMS = ["id", "create"];
 

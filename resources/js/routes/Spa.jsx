@@ -13,15 +13,14 @@ import {
   W_SIGNIN,
   W_S_ACCOUNT,
   W_SIGNUP,
-  W_NEWS_FEEDS,
   W_NEWS_DETAIL,
   W_NEWS,
 } from "../vars/web";
 import Home from "../pages/news/Home";
 import AccountSettings from "../pages/settings/AccountSettings";
 import Signup from "../pages/auth/Signup";
-import Feeds from "../pages/news/Feeds";
 import Detail from "../pages/news/Detail";
+import List from "../pages/news/List";
 
 function Spa() {
   return (
@@ -37,8 +36,7 @@ function Spa() {
           <Route path={W_RESET} element={<ResetPassword />} />
 
           {/* main */}
-          <Route path={W_NEWS} element={<Feeds />} />
-          <Route path={W_NEWS_FEEDS} element={<Feeds />} />
+          <Route path={W_NEWS} element={<List />} />
           <Route path={W_NEWS_DETAIL} element={<Detail />} />
 
           {/* settings */}

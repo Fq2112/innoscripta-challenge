@@ -21,6 +21,7 @@ import {
 } from "../../vars/api";
 import { AUTH3_IMG } from "../../vars/assets";
 import { setDateFormat } from "../../helpers/DateHelper";
+import { W_NEWS } from "../../vars/web";
 
 export default function Home() {
   const [updateLock] = useState("home");
@@ -129,7 +130,7 @@ export default function Home() {
                             ? `${wordLimit(v.description, 80)}...`
                             : v.description
                         }
-                        url={`/news/detail/${v.permalink}`}
+                        url={`/news/${v.category_code}/${v.permalink}`}
                         date={setDateFormat({
                           date: v.published_at,
                           withTime: true,
@@ -145,11 +146,11 @@ export default function Home() {
                   message={`There's no any ${e.name} News found!`}
                   addClass={"text-center"}
                   htmlFor="action-search"
-                  noBg={true}
+                  noBg={false}
                 >
                   <div className="flex justify-center mb-8">
                     <Link
-                      to="/"
+                      to={W_NEWS}
                       className="w-48 uppercase py-2 px-4 text-lg text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70"
                     >
                       Search More

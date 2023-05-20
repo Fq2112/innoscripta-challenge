@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Transition from "../../utils/Transition";
+import { FaAngleDown } from "react-icons/fa";
 
 function DropdownLimit({
   options = [],
@@ -56,25 +57,14 @@ function DropdownLimit({
     <div className="relative inline-flex">
       <button
         ref={trigger}
-        className={`btn justify-between ${classMinWidth} bg-white dark:bg-navy-700 border-slate-200 dark:border-navy-500 dark:hover:border-navy-600 hover:border-slate-300 dark:text-navy-100 dark:hover:text-navy-200 text-slate-500 hover:text-slate-600`}
+        className={`flex items-center py-2 px-3 font-medium justify-between ${classMinWidth} bg-white dark:bg-navy-700 border-slate-200 dark:border-navy-500 dark:hover:border-navy-600 hover:border-slate-300 dark:text-navy-100 dark:hover:text-navy-200 text-slate-500 hover:text-slate-600 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out`}
         aria-label="Select date range"
         aria-haspopup="true"
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
       >
-        <span className="flex items-center">
-          <span>
-            {options.find((e) => e.value == selected)?.label ?? "selected one"}
-          </span>
-        </span>
-        <svg
-          className="shrink-0 ml-1 fill-current text-slate-400"
-          width="11"
-          height="7"
-          viewBox="0 0 11 7"
-        >
-          <path d="M5.4 6.8L0 1.4 1.4 0l4 4 4-4 1.4 1.4z" />
-        </svg>
+        {options.find((e) => e.value == selected)?.label ?? "selected one"}
+        <FaAngleDown className="w-4 h-4 flex-none opacity-70" />
       </button>
       <Transition
         show={dropdownOpen}
@@ -99,7 +89,8 @@ function DropdownLimit({
                 key={option.value}
                 tabIndex="0"
                 className={`flex items-center w-full hover:bg-slate-50 dark:hover:bg-navy-400 py-1 px-3 cursor-pointer ${
-                  option.value === selected && "text-primary-100 dark:text-primary-100"
+                  option.value === selected &&
+                  "text-primary-100 dark:text-primary-100"
                 }`}
                 onClick={() => {
                   setSelected(option.value);

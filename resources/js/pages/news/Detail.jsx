@@ -70,7 +70,7 @@ export default function Detail() {
           { name: "News", url: W_NEWS },
           {
             name: details.category_name,
-            url: `/news/${details.category_code}`,
+            url: `/news?category=${details.category_code}`,
           },
           { name: "Detail" },
         ]}
@@ -140,7 +140,7 @@ export default function Detail() {
                       {!loadingFeeds &&
                         feedsData[details.category_code].map((v) => (
                           <Link
-                            to={`/news/detail/${v.permalink}`}
+                            to={`/news/${v.category_code}/${v.permalink}`}
                             key={`${v.id}-related-news`}
                             onClick={() =>
                               detailData({
@@ -172,11 +172,11 @@ export default function Detail() {
                       message={`There's no any Related News found!`}
                       addClass={"text-center"}
                       htmlFor="action-search"
-                      noBg={true}
+                      noBg={false}
                     >
                       <div className="flex justify-center mb-8">
                         <Link
-                          to="/"
+                          to={W_NEWS}
                           className="w-48 uppercase py-2 px-4 text-lg text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70"
                         >
                           Search More

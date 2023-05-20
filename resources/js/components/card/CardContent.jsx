@@ -21,7 +21,7 @@ const CardContent = ({
       ></div>
       <div className="w-2/3 py-4 px-6 relative">
         <h3 className="flex gap-x-1.5 pb-1 items-center text-xs text-slate-400 font-semibold">
-          <FaClock className="w-2 h-2 flex-none opacity-50" />
+          <FaClock className="w-2.5 h-2.5 flex-none opacity-50" />
           {date}
         </h3>
         <h2 className="uppercase text-xl pb-2 font-bold text-primary-200">
