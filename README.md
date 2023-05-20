@@ -47,8 +47,8 @@ Follow this step guide to prepare the requirement system before using the apps
     docker-compose up --build nginx -d
     ```
 8. Open it on your browser 
-    [x] http://localhost:8000 (Main Apps)
-    [x] http://localhost:8888 (phpMyAdmin)
+    - [x] http://localhost:8000 (Main Apps)
+    - [x] http://localhost:8888 (phpMyAdmin)
 
 ## Getting Started (w/o Docker)
 Follow this step guide to prepare the requirement system before using the apps
@@ -135,8 +135,6 @@ Don't forget to give the project a star! Thanks again!
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-<p align="right">(<a href="#readme">back to top</a>)</p>
 
 <!-- LICENSE -->
 ## License
