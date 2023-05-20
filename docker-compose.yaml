@@ -26,7 +26,6 @@ services:
       - laravel-queue
       - laravel-cron
       - phpmyadmin
-      - mailhog
     networks:
       - laravel
 
@@ -48,12 +47,12 @@ services:
       - laravel
 
   mysql:
-    image: mariadb:10.6
+    image: mariadb:latest
+    ports:
+      - 8889:3306
     container_name: mysql
     restart: unless-stopped
     tty: true
-    ports:
-      - 3307:3306
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
@@ -113,17 +112,6 @@ services:
     networks:
       - laravel
 
-  mailhog:
-    image: mailhog/mailhog:latest
-    container_name: mailhog
-    logging:
-      driver: 'none'
-    ports:
-      - 1025:1025
-      - 8025:8025
-    networks:
-      - laravel
-
   phpmyadmin:
     image: phpmyadmin:5.2.0
     container_name: phpmyadmin
@@ -159,7 +147,7 @@ services:
     entrypoint: ["/bin/sh","-c"]
     command:
     - |
-      php artisan migrate
+      php artisan migrate:fresh
       php artisan db:seed
     networks:
       - laravel

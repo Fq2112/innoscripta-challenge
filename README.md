@@ -14,9 +14,43 @@
 ### Prerequisites
 
 In order to run this prroject you should have `Docker` and `Docker Compose` installed on your local machine.
-Just in case, you don't feel like to use the docker you can just follow the instruction bellow.
+Just in case, you don't feel like to use the docker you can just follow the instruction "Getting Started (w/o Docker)".
 
-## Getting Started
+## Getting Started (w/ Docker)
+Follow this step guide to prepare the requirement system before using the apps
+1. Install composer 
+    ```sh
+    docker-compose run --rm composer install
+    ```
+2. Install npm (you can use yarn)
+    ```sh
+    docker-compose run --rm npm install
+    ```
+3. Migrate database
+    ```sh
+    docker-compose run --rm laravel-migrate-seed
+    ```
+4. Regenerate key apps
+    ```sh
+    docker-compose run --rm artisan key:generate
+    ```
+5. Optimized apps (config & routes cache)
+    ```sh
+    docker-compose run --rm artisan optimize
+    ```
+6. Build the frontend assets
+    ```sh
+    docker-compose run --rm --service-ports npm run build
+    ```
+7. Last but not least, run the server in backround
+    ```sh
+    docker-compose up --build nginx -d
+    ```
+8. Open it on your browser 
+    [x] http://localhost:8000 (Main Apps)
+    [x] http://localhost:8888 (phpMyAdmin)
+
+## Getting Started (w/o Docker)
 Follow this step guide to prepare the requirement system before using the apps
 1. Download and install [Composer](https://getcomposer.org/)
 2. Download and install [NodeJS](https://nodejs.org/en/download)
