@@ -49,10 +49,7 @@ Follow this step guide to prepare the requirement system before using the apps
     ```sh
    yarn run dev
    ```
-10. Open it on your browser
-    ```sh
-   http://localhost:8000
-   ```
+10. Open it on your browser (http://localhost:8000)
 
 ## Overview
 
