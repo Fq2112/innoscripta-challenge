@@ -41,7 +41,7 @@ const EmptyState = ({
             className={classNames({ "cursor-pointer": htmlFor })}
           >
             <h4
-              className={classNames("text-xl mb-4 dark:text-navy-100", {
+              className={classNames("md:text-xl mb-4 dark:text-navy-100", {
                 [addClass]: addClass,
               })}
             >

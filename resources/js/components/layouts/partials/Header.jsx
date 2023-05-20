@@ -1,6 +1,6 @@
 import { BsEnvelopePaper, BsPhone } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { HiMenu, HiOutlineMenuAlt1 } from "react-icons/hi";
 import { RiCloseLine } from "react-icons/ri";
 import {
   SlSocialInstagram,
@@ -198,8 +198,9 @@ const Header = ({ isMenuWhite }) => {
                   "flex scale-x-100 translate-y-0 opacity-100":
                     showMenu && burgerAnimate,
                   "text-slate-400": isMenuWhite && !showMenu,
-                  "top-24 bg-slate-400": !isMenuWhite && showMenu,
-                  "top-16 bg-secondary-400": isMenuWhite && showMenu,
+                  "top-24 text-slate-600 bg-white/80": !isMenuWhite && showMenu,
+                  "top-[3.75rem] text-slate-600 bg-white":
+                    isMenuWhite && showMenu,
                 }
               )}
             >
@@ -217,7 +218,7 @@ const Header = ({ isMenuWhite }) => {
                 to={W_NEWS}
                 className={classNames(
                   "uppercase transition-all duration-300 hover:text-primary-100 hover:scale-x-105",
-                  { "text-primary-100": pathname.includes("/news") }
+                  { "text-primary-100": pathname == "/news" }
                 )}
               >
                 News
@@ -263,7 +264,7 @@ const Header = ({ isMenuWhite }) => {
               className="md:hidden w-11 h-11 flex items-center justify-center border border-white rounded-lg hover:opacity-70 hover:border-white/70"
               onClick={showBurgerMenu}
             >
-              <HiOutlineMenuAlt1
+              <HiMenu
                 className={classNames(
                   "absolute h-10 w-10 transition-all duration-300 ease-in-out ",
                   {

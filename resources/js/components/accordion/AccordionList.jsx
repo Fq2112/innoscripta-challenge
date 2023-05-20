@@ -21,11 +21,11 @@ function AccordionList({
       >
         <div
           className={classNames(
-            "flex items-center gap-x-3 uppercase font-medium transition ease duration-50",
+            "flex items-center gap-x-1.5 md:gap-x-3 text-xs md:text-base uppercase font-medium transition ease duration-50",
             { "!text-primary-50": focus == tabIndex }
           )}
         >
-          <Icon className="flex-none w-5 h-5" />
+          <Icon className="flex-none w-2.5 md:w-5 h-2.5 md:h-5" />
           {title}
         </div>
         <div
@@ -34,7 +34,7 @@ function AccordionList({
             { "text-primary-50 -rotate-180": focus == tabIndex }
           )}
         >
-          <FaAngleDown className="flex-none w-full h-full" />
+          <FaAngleDown className="flex-none w-3.5 md:w-full h-3.5 md:h-full" />
         </div>
       </div>
       <div

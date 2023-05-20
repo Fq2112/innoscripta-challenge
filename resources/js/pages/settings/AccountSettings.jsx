@@ -183,10 +183,10 @@ function AccountSettings() {
               <div className="text-center mb-8 relative">
                 {isProfile ? (
                   <>
-                    <h2 className="uppercase text-4xl font-['Helvetica'] font-bold pb-4">
+                    <h2 className="uppercase text-xl md:text-4xl font-['Helvetica'] font-bold pb-4">
                       Preferences
                     </h2>
-                    <h4 className="w-fit mx-auto text-xl">
+                    <h4 className="w-fit mx-auto text-sm md:text-xl">
                       Here you can edit your profile and the news preference as
                       well or you can click the button below to change your
                       account password
@@ -194,10 +194,10 @@ function AccountSettings() {
                   </>
                 ) : (
                   <>
-                    <h2 className="uppercase text-4xl font-['Helvetica'] font-bold pb-4">
+                    <h2 className="uppercase text-xl md:text-4xl font-['Helvetica'] font-bold pb-4">
                       Password
                     </h2>
-                    <h4 className="w-fit mx-auto text-xl">
+                    <h4 className="w-fit mx-auto text-sm md:text-xl">
                       Here you can change your account password or click the
                       button below to edit your profile and the news preference
                       as well
@@ -208,7 +208,7 @@ function AccountSettings() {
 
               <button
                 type="button"
-                className="relative text-lg uppercase py-2 px-6 rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 "
+                className="relative text-sm md:text-lg uppercase py-2 px-4 md:px-6 rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 "
                 onClick={() => {
                   setisProfile(!isProfile);
                   setFocus(0);
@@ -228,7 +228,7 @@ function AccountSettings() {
             >
               <div className="px-6 py-4 md:px-8 xl:px-12 md:py-6 w-full">
                 <div>
-                  <h1 className="uppercase text-4xl pt-4 pb-6 font-['Helvetica'] font-extrabold text-center">
+                  <h1 className="uppercase text-xl md:text-4xl pt-4 pb-6 font-['Helvetica'] font-extrabold text-center">
                     {isProfile ? (
                       <>
                         Edit <span className="text-primary-200">Profile</span>

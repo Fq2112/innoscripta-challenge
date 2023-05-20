@@ -82,13 +82,13 @@ export default function Detail() {
           {/* overlay */}
           <Overlay1 />
 
-          <div className="relative container mx-auto flex gap-24">
+          <div className="relative container mx-auto md:flex gap-24">
             {loading ? (
               <LoadingForm />
             ) : (
               <>
-                <div className="w-2/3">
-                  <h3 className="flex gap-x-2 pb-2 items-center text-base text-slate-500 font-semibold">
+                <div className="w-full md:w-2/3">
+                  <h3 className="flex gap-x-2 pb-2 items-center text-sm md:text-base text-slate-500 font-semibold">
                     <FaClock className="w-4 h-4 flex-none" />
                     {setDateFormat({
                       date: details.published_at,
@@ -96,7 +96,7 @@ export default function Detail() {
                       withWeekDay: true,
                     })}
                   </h3>
-                  <h1 className="uppercase text-5xl font-['Helvetica'] font-bold pb-4">
+                  <h1 className="uppercase text-3xl md:text-5xl font-['Helvetica'] font-bold pb-4">
                     <span className="text-primary-200 uppercase">
                       {details.title}
                     </span>
@@ -107,30 +107,32 @@ export default function Detail() {
                     }
                     className="w-full mb-4"
                   />
-                  <h2 className="border-l-8 border-primary-100 pl-2 text-3xl mb-8">
+                  <h2 className="border-l-[6px] md:border-l-8 border-primary-100 pl-2 text-xl md:text-3xl mb-8">
                     {details.description}
                   </h2>
-                  <h3 className="text-xl font-semibold">
+                  <h3 className="md:text-xl font-semibold">
                     by {details.author_name ? details.author_name : "Anonymous"}
                   </h3>
-                  <h4 className="text-lg mb-3 transition-all hover:text-primary-200 duration-300">
+                  <h4 className="text-sm md:text-lg mb-3 transition-all hover:text-primary-200 duration-300">
                     <a href={details.source_url} target="_blank">
                       {details.source_name}
                     </a>
                   </h4>
-                  <div className="bg-slate-400/50 w-10 h-1 mb-8"></div>
-                  <p className="text-2xl mb-12">{details.content}</p>
+                  <div className="bg-slate-400/50 w-10 h-[0.2rem] md:h-1 mb-8"></div>
+                  <p className="text-xl md:text-3xl mb-12">{details.content}</p>
                   <a
                     href={details.url}
                     target="_blank"
-                    className="uppercase py-3 px-5 rounded-full hover-box-shadow font-medium transition-all duration-300 text-white bg-primary-200 hover:bg-primary-200/70"
+                    className="uppercase py-3 px-5 text-sm md:text-base rounded-full hover-box-shadow font-medium transition-all duration-300 text-white bg-primary-200 hover:bg-primary-200/70"
                   >
                     Read Origin News
                   </a>
                 </div>
-                <div className="w-1/3">
-                  <h2 className="text-3xl mb-3 font-medium">Related News</h2>
-                  <div className="bg-slate-400/50 w-20 h-1 mb-4"></div>
+                <div className="w-full mt-20 md:mt-0 md:w-1/3">
+                  <h2 className="text-xl md:text-3xl mb-3 font-medium">
+                    Related News
+                  </h2>
+                  <div className="bg-slate-400/50 w-20 h-[0.2rem] md:h-1 mb-4"></div>
 
                   {loadingFeeds && <LoadingForm />}
 
@@ -177,7 +179,7 @@ export default function Detail() {
                       <div className="flex justify-center mb-8">
                         <Link
                           to={W_NEWS}
-                          className="w-48 uppercase py-2 px-4 text-lg text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70"
+                          className="w-36 md:w-48 text-sm md:text-lg uppercase p-2 md:p-3 text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70"
                         >
                           Search More
                         </Link>

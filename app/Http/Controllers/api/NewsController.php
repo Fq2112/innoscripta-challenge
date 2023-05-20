@@ -161,7 +161,7 @@ class NewsController extends Controller
 
         try {
             $limit = $request->limit ?? 10;
-            $data = $this->model->newsList()->paginate($limit);
+            $data = $this->model->newsList()->paginate($limit)->onEachSide(1);
 
             return $this->responseLoadDataSuccess($data, $this->name, true);
         } catch (\Throwable $e) {

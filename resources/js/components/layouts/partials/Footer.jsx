@@ -77,17 +77,17 @@ const Footer = () => {
             <Link to="/">
               <img
                 src={darkMode ? LOGO_WHITE_IMG() : LOGO_IMG()}
-                className="w-2/3"
+                className="w-1/3 md:w-2/3"
                 alt="logo"
               />
             </Link>
 
-            <p className="text-sm text-justify pt-2">
+            <p className="text-sm text-justify pt-5 md:pt-2">
               Stay informed and up-to-date with the latest news and stories from
               around the world by visiting us: {APP_NAME}, {APP_TAGLINE}!
             </p>
 
-            <div className="pt-6 pb-10">
+            <div className="pt-6 pb-4 md:pb-10">
               <h4 className="uppercase font-semibold tracking-wide pb-3">
                 Subscribe Newsletter
               </h4>
@@ -105,7 +105,7 @@ const Footer = () => {
           </div>
 
           {/* contact */}
-          <div className="flex flex-col gap-2 pb-10">
+          <div className="flex flex-col gap-2 pb-4 md:pb-10">
             <div>
               <h4 className="uppercase font-semibold tracking-wide xl:pt-10">
                 get in touch
@@ -131,7 +131,7 @@ const Footer = () => {
                 </a>
               </ul>
             </div>
-            <ul className="flex gap-x-6 text-white pt-2">
+            <ul className="flex gap-x-6 text-white md:pt-2">
               <a href={CLIENT_IG} target="_blank">
                 <li className="flex justify-center gap-x-2 items-center hover:bg-primary-200 hover:border-none hover:text-white cursor-pointer transition-all ease-in-out duration-300 border border-slate-400 rounded-full w-10 h-10 hover:scale-110 hover:-translate-y-1">
                   <SlSocialInstagram className="w-4 h-4" />
@@ -153,8 +153,7 @@ const Footer = () => {
           {/* latest blog */}
           <div
             id="google-map"
-            className="gmap md:col-span-2 xl:mt-10 h-[17rem]"
-            style={{ height: "75%" }}
+            className="gmap md:col-span-2 xl:mt-10 h-[17rem] md:h-3/4 mb-6 md:mb-0"
           >
             <GoogleMap />
           </div>
@@ -171,7 +170,7 @@ const Footer = () => {
               </a>
               . All rights reserved.
             </p>
-            <div className="flex divide-x">
+            <div className="flex divide-x text-right">
               <a
                 href={CLIENT_PP_URL}
                 target="_blank"

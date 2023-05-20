@@ -33,7 +33,7 @@ function FormButton({ onCancel, submitText = "Submit" }) {
     <div className="flex gap-x-2 justify-end mt-8">
       <button
         type="button"
-        className="min-w-[7rem] items-center justify-center w-fit uppercase py-2 px-4 text-sm text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 bg-slate-200 hover:bg-slate-200/70"
+        className="min-w-[6rem] md:min-w-[7rem] items-center justify-center w-fit uppercase py-2 px-2 md:px-4 text-xs md:text-sm text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 bg-slate-200 hover:bg-slate-200/70"
         onClick={() => (onCancel ? onCancel() : setGoingBack(true))}
       >
         cancel
@@ -42,7 +42,7 @@ function FormButton({ onCancel, submitText = "Submit" }) {
       <button
         disabled={accessable.can_update == false}
         className={classNames(
-          "min-w-[7rem] items-center justify-center w-fit flex gap-x-1 uppercase py-2 px-4 text-sm text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70",
+          "min-w-[6rem] md:min-w-[7rem] items-center justify-center w-fit flex gap-x-1 uppercase py-2 px-2 md:px-4 text-xs md:text-sm text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70",
           {
             "opacity-75 cursor-not-allowed": accessable.can_update == false,
           }

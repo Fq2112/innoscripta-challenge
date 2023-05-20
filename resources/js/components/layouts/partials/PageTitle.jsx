@@ -16,14 +16,14 @@ const PageTitle = ({ title, children, links, imageUrl, isSlate = false }) => {
             style={{ backgroundImage: `url(${imageUrl})` }}
           ></div>
           <div className="relative container mx-auto mb-12">
-            <div className="flex justify-between uppercase text-left pt-40 pb-4">
+            <div className="md:flex justify-between uppercase text-center md:text-left pt-32 md:pt-40 pb-4">
               <div className="max-w-2xl">
-                <h1 className="text-4xl font-bold uppercase mb-2 tracking-wide">
+                <h1 className="text-2xl md:text-4xl font-bold uppercase mb-2 tracking-wide">
                   {title}
                 </h1>
                 <span className="text-lg">{children}</span>
               </div>
-              <ol className="breadcrumb">
+              <ol className="breadcrumb justify-center md:justify-end">
                 {links.map((e, i) => {
                   return e.url ? (
                     <li key={i} className="breadcrumb-item">

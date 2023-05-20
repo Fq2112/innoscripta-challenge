@@ -166,42 +166,16 @@ export default function List() {
           <div className="relative container mx-auto">
             {/* head title*/}
             <div className="pb-8 text-center">
-              <h2 className="uppercase text-5xl font-['Helvetica'] font-bold pb-4">
+              <h2 className="uppercase text-3xl md:text-5xl font-['Helvetica'] font-bold pb-4">
                 Seach <span className="text-primary-200 uppercase">News</span>
               </h2>
-              <h4 className="w-fit mx-auto text-xl">
+              <h4 className="w-fit mx-auto md:text-xl">
                 Stay Informed and Empowered with the Latest News
               </h4>
             </div>
 
-            <div className="sm:flex sm:justify-between sm:items-center mb-2">
-              <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2 mb-4 sm:mb-0">
-                <DropdownLimit
-                  options={LIMIT_DEFAULT}
-                  defaultValue={params.limit ?? 10}
-                  onChange={(value) => paramsEvent("limit", value)}
-                  classMinWidth="min-w-[8rem]"
-                />
-                <Datepicker
-                  onChange={(e) => {
-                    paramsMultiEvent({
-                      start_date_range: e[0],
-                      end_date_range: e[1],
-                    });
-                  }}
-                  data={{
-                    dateStart: params.start_date_range ?? null,
-                    dateEnd: params.end_date_range ?? null,
-                  }}
-                />
-              </div>
-
-              <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-                <SearchForm
-                  defaultValue={params.q}
-                  placeholder="News Title / Content&hellip;"
-                  onChange={(value) => paramsEvent("q", value)}
-                />
+            <div className="w-full grid md:grid-cols-2 justify-between items-center gap-2">
+              <div className="flex gap-2 justify-start">
                 <button
                   onClick={() => setGridView(!gridView)}
                   className="btn group bg-white dark:bg-navy-700 border-slate-200 dark:border-navy-500 text-slate-500 dark:text-navy-100 hover:border-primary-50 hover:text-primary-50 dark:hover:border-primary-50 dark:hover:text-primary-50"
@@ -216,73 +190,105 @@ export default function List() {
                     )}
                   </Tooltip>
                 </button>
+                <SearchForm
+                  defaultValue={params.q}
+                  placeholder="News Title / Content&hellip;"
+                  onChange={(value) => paramsEvent("q", value)}
+                />
               </div>
-            </div>
 
-            <div className="sm:flex sm:justify-between sm:items-center mb-2">
-              <SelectAsync
-                setClass="no-padding min-w-[26.6rem] max-w-[604px]"
-                defaultValueMulti={
-                  params.category &&
-                  params.category.split(",").map((e) => ({
-                    label: e,
-                    value: e,
-                  }))
-                }
-                placeholder="-- Select Categories --"
-                name="category"
-                isMulti={true}
-                preventLabel={true}
-                isClearable={true}
-                register={register}
-                isLoading={getLoading[L_S_CATEGORY]}
-                loadAPI={(search, cb) =>
-                  selectData({
-                    path: A_U_CATEGORY,
-                    search,
-                    loadingVar: L_S_CATEGORY,
-                    cb,
-                  })
-                }
-                setValueMulti={(e) => setValue("category", e)}
-                onChange={(e) => {
-                  updateValue(
-                    "category",
-                    e.map((v) => v.value).join(","),
-                    true
-                  );
-                }}
-              />
+              <div className="flex gap-2 justify-end">
+                <Datepicker
+                  onChange={(e) => {
+                    paramsMultiEvent({
+                      start_date_range: e[0],
+                      end_date_range: e[1],
+                    });
+                  }}
+                  data={{
+                    dateStart: params.start_date_range ?? null,
+                    dateEnd: params.end_date_range ?? null,
+                  }}
+                />
+                <DropdownLimit
+                  options={LIMIT_DEFAULT}
+                  defaultValue={params.limit ?? 10}
+                  onChange={(value) => paramsEvent("limit", value)}
+                  classMinWidth="min-w-[8rem]"
+                />
+              </div>
 
-              <SelectAsync
-                setClass="no-padding min-w-[26.6rem] max-w-[604px]"
-                defaultValueMulti={
-                  params.source &&
-                  params.source.split(",").map((e) => ({
-                    label: e,
-                    value: e,
-                  }))
-                }
-                placeholder="-- Select Sources --"
-                name="source"
-                isMulti={true}
-                preventLabel={true}
-                isClearable={true}
-                register={register}
-                isLoading={getLoading[L_S_SOURCE]}
-                loadAPI={(search, cb) =>
-                  selectData({
-                    path: A_U_SOURCE,
-                    search,
-                    loadingVar: L_S_SOURCE,
-                    cb,
-                  })
-                }
-                setValueMulti={(e) => setValue("source", e)}
-                onChange={(e) => {
-                  updateValue("source", e.map((v) => v.value).join(","), true);
-                }}
-              />
+              <div className="flex justify-start">
+                <SelectAsync
+                  setClass="no-padding min-w-[26.6rem] max-w-[604px]"
+                  defaultValueMulti={
+                    params.category &&
+                    params.category.split(",").map((e) => ({
+                      label: e,
+                      value: e,
+                    }))
+                  }
+                  placeholder="-- Select Categories --"
+                  name="category"
+                  isMulti={true}
+                  preventLabel={true}
+                  isClearable={true}
+                  register={register}
+                  isLoading={getLoading[L_S_CATEGORY]}
+                  loadAPI={(search, cb) =>
+                    selectData({
+                      path: A_U_CATEGORY,
+                      search,
+                      loadingVar: L_S_CATEGORY,
+                      cb,
+                    })
+                  }
+                  setValueMulti={(e) => setValue("category", e)}
+                  onChange={(e) => {
+                    updateValue(
+                      "category",
+                      e.map((v) => v.value).join(","),
+                      true
+                    );
+                  }}
+                />
+              </div>
+
+              <div className="flex justify-end">
+                <SelectAsync
+                  setClass="no-padding min-w-[26.6rem] max-w-[604px]"
+                  defaultValueMulti={
+                    params.source &&
+                    params.source.split(",").map((e) => ({
+                      label: e,
+                      value: e,
+                    }))
+                  }
+                  placeholder="-- Select Sources --"
+                  name="source"
+                  isMulti={true}
+                  preventLabel={true}
+                  isClearable={true}
+                  register={register}
+                  isLoading={getLoading[L_S_SOURCE]}
+                  loadAPI={(search, cb) =>
+                    selectData({
+                      path: A_U_SOURCE,
+                      search,
+                      loadingVar: L_S_SOURCE,
+                      cb,
+                    })
+                  }
+                  setValueMulti={(e) => setValue("source", e)}
+                  onChange={(e) => {
+                    updateValue(
+                      "source",
+                      e.map((v) => v.value).join(","),
+                      true
+                    );
+                  }}
+                />
+              </div>
             </div>
 
             {/* content */}
@@ -290,9 +296,9 @@ export default function List() {
             {data.length ? (
               <>
                 <div
-                  className={classNames("grid gap-6 py-4", {
-                    "md:grid-cols-2": gridView,
-                    "md:grid-cols-1": !gridView,
+                  className={classNames("w-full grid gap-6 py-4", {
+                    "xl:grid-cols-2": gridView,
+                    "grid-cols-1": !gridView,
                   })}
                 >
                   {!loading &&
@@ -333,7 +339,7 @@ export default function List() {
                 <div className="flex justify-center mb-8">
                   <button
                     onClick={(e) => e}
-                    className="w-48 uppercase py-2 px-4 text-lg text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70"
+                      className="w-36 md:w-48 text-sm md:text-lg uppercase p-2 md:p-3 text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70"
                   >
                     Sync News
                   </button>

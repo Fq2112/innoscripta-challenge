@@ -107,10 +107,10 @@ export default function Home() {
             <div className="relative container mx-auto">
               {/* head title*/}
               <div className="pb-8 text-center">
-                <h2 className="uppercase text-5xl font-['Helvetica'] font-bold pb-4">
+                <h2 className="uppercase text-3xl md:text-5xl font-['Helvetica'] font-bold pb-4">
                   <span className="text-primary-200">{e.name}</span> News
                 </h2>
-                <h4 className="w-fit mx-auto text-xl">
+                <h4 className="w-fit mx-auto md:text-xl">
                   Stay Informed and Empowered with the Latest {e.name} News
                 </h4>
               </div>
@@ -118,7 +118,7 @@ export default function Home() {
               {/* content */}
               {loadingFeeds && <LoadingForm />}
               {feedsData[e.code] && feedsData[e.code].length ? (
-                <div className="grid md:grid-cols-2 gap-6 py-4">
+                <div className="grid xl:grid-cols-2 gap-6 py-4">
                   {!loadingFeeds &&
                     feedsData[e.code].map((v) => (
                       <CardContent
@@ -151,7 +151,7 @@ export default function Home() {
                   <div className="flex justify-center mb-8">
                     <Link
                       to={W_NEWS}
-                      className="w-48 uppercase py-2 px-4 text-lg text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70"
+                      className="w-36 md:w-48 text-sm md:text-lg uppercase p-2 md:p-3 text-center rounded-full hover-box-shadow font-medium transition-all duration-300 hover:scale-x-105 text-white bg-primary-400 hover:bg-primary-400/70"
                     >
                       Search More
                     </Link>

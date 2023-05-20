@@ -80,14 +80,14 @@ function Signin() {
                   <img
                     src={darkMode ? LOGO_WHITE_IMG() : LOGO_IMG()}
                     alt="logo"
-                    className="mt-16 w-[30%]"
+                    className="mt-20 md:mt-16 w-[40%] md:w-[30%]"
                   />
                 </Link>
               </div>
             </div>
 
-            <div className="max-w-lg mx-auto px-4 py-8">
-              <h1 className="text-3xl text-slate-800 font-bold mb-6 dark:text-navy-100 dark:font-medium">
+            <div className="max-w-lg mx-auto px-6 md:px-4 py-8">
+              <h1 className="text-xl md:text-3xl text-slate-800 font-bold mb-6 dark:text-navy-100 dark:font-medium">
                 Welcome back! Please sign in to your {APP_NAME} Account
               </h1>
               {/* Form */}

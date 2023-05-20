@@ -74,8 +74,8 @@ const Hero = ({ data }) => {
           data.map((e) => (
             <SwiperSlide key={`${e.id}-content`}>
               <Overlay src={e.url_to_image ? e.url_to_image : AUTH3_IMG()}>
-                <div className="flex flex-col gap-y-2 text-left pt-[10rem]">
-                  <h3 className="flex gap-x-2 items-center text-lg font-semibold">
+                <div className="flex flex-col gap-y-2 text-left pt-48 md:pt-40">
+                  <h3 className="flex gap-x-2 items-center text-sm md:text-lg font-semibold">
                     <FaClock className="w-4 h-4 flex-none text-slate-400" />
                     {setDateFormat({
                       date: e.published_at,
@@ -83,17 +83,17 @@ const Hero = ({ data }) => {
                       withWeekDay: true,
                     })}
                   </h3>
-                  <h1 className="text-5xl font-extrabold tracking-wider text-primary-50">
+                  <h1 className="text-3xl md:text-5xl font-bold tracking-wider text-primary-50">
                     {e.title}
                   </h1>
                   <div className="bg-secondary-800/70 py-2 px-3 tracking-wide relative w-fit">
-                    <h2 className="w-full text-lg font-semibold">
+                    <h2 className="w-full text-sm md:text-lg font-semibold">
                       {e.description}
                     </h2>
                   </div>
-                  <ul className="flex flex-col gap-y-1 pt-2 pb-6 font-light text-base">
+                  <ul className="flex flex-col gap-y-1 pt-2 pb-6 font-light text-sm md:text-base">
                     <li className="flex gap-x-2 items-center">
-                      <FaEdit className="w-4 h-4 flex-none text-slate-400" />
+                      <FaEdit className="w-3 h-3 flex-none text-slate-400" />
                       <div className="flex gap-x-1">
                         by
                         <span className="font-medium">
@@ -102,7 +102,7 @@ const Hero = ({ data }) => {
                       </div>
                     </li>
                     <li className="flex gap-x-2 items-center">
-                      <BsNewspaper className="w-4 h-4 flex-none text-slate-400" />
+                      <BsNewspaper className="w-3 h-3 flex-none text-slate-400" />
                       <div className="flex gap-x-1">
                         from
                         <a
@@ -117,7 +117,7 @@ const Hero = ({ data }) => {
                   </ul>
                   <Link
                     to={`/news/${e.category_code}/${e.permalink}`}
-                    className="w-48 uppercase p-3 text-lg text-center font-bold rounded-full hover-box-shadow transition-all ease-in-out duration-300 hover:scale-x-105 text-white bg-primary-200 hover:bg-primary-200/70"
+                    className="w-32 md:w-48 uppercase p-2 md:p-3 text-sm md:text-lg text-center font-bold rounded-full hover-box-shadow transition-all ease-in-out duration-300 hover:scale-x-105 text-white bg-primary-200 hover:bg-primary-200/70"
                   >
                     Read More
                   </Link>
@@ -140,7 +140,7 @@ const Hero = ({ data }) => {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="container !mx-auto mySwiper"
+        className="container !mx-auto mySwiper !hidden xl:!block"
       >
         {data &&
           data.map((e, i) => (
